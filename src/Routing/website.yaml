@@ -1,0 +1,7 @@
+website_homepage:
+    path: /
+    controller: App\Controller\HomepageController::index
+
+website_inscription:
+    path: /inscription
+    controller: App\Controller\HomepageController::inscription
