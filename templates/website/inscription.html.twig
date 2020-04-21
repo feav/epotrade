@@ -8,7 +8,203 @@
 
 {% block stylesheets %}
 	{{parent()}}
-    <style type="text/css"></style>
+    <link href="assets/css/wizard.css" rel="stylesheet" type="text/css" media="all" />
+    <style type="text/css">
+    	.lds-ripple {
+	        display: none;
+	        width: 80px;
+	        height: 80px;
+	        position: absolute;
+	        top: 40%;
+	        left: 0;
+	        right: 0;
+	        margin: auto;
+	        transform: translateY(-50%);
+	        z-index: 50;
+	    }
+	    .lds-ripple div {
+	      position: absolute;
+	      border: 4px solid green;
+	      opacity: 1;
+	      border-radius: 50%;
+	      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+	    }
+	    .lds-ripple div:nth-child(2) {
+	      animation-delay: -0.5s;
+	    }
+	    @keyframes lds-ripple {
+	      0% {
+	        top: 36px;
+	        left: 36px;
+	        width: 0;
+	        height: 0;
+	        opacity: 1;
+	      }
+	      100% {
+	        top: 0px;
+	        left: 0px;
+	        width: 72px;
+	        height: 72px;
+	        opacity: 0;
+	      }
+	    }
+
+
+	    /**
+	     * Extracted from: SweetAlert
+	     * Modified by: Istiak Tridip
+	     */
+	    .success-checkmark {
+	        position: absolute;
+	        top: 50%;
+	        left: 0;
+	        right: 0;
+	        transform: translateY(-50%);
+	        z-index: 60;
+	      width: 80px;
+	      height: 115px;
+	      margin: 0 auto;
+	      display: none;
+	    }
+	    .success-checkmark .check-icon {
+	      width: 80px;
+	      height: 80px;
+	      position: relative;
+	      border-radius: 50%;
+	      box-sizing: content-box;
+	      border: 4px solid #4CAF50;
+	      display: none;
+	    }
+	    .success-checkmark .check-icon::before {
+	      top: 3px;
+	      left: -2px;
+	      width: 30px;
+	      transform-origin: 100% 50%;
+	      border-radius: 100px 0 0 100px;
+	    }
+	    .success-checkmark .check-icon::after {
+	      top: 0;
+	      left: 30px;
+	      width: 60px;
+	      transform-origin: 0 50%;
+	      border-radius: 0 100px 100px 0;
+	      animation: rotate-circle 4.25s ease-in;
+	    }
+	    .success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
+	      content: '';
+	      height: 80px;
+	      position: absolute;
+	      /*background: #FFFFFF;*/
+	      transform: rotate(-45deg);
+	    }
+	    .success-checkmark .check-icon .icon-line {
+	      height: 5px;
+	      background-color: #4CAF50;
+	      display: block;
+	      border-radius: 2px;
+	      position: absolute;
+	      z-index: 10;
+	    }
+	    .success-checkmark .check-icon .icon-line.line-tip {
+	      top: 46px;
+	      left: 14px;
+	      width: 25px;
+	      transform: rotate(45deg);
+	      animation: icon-line-tip 0.75s;
+	    }
+	    .success-checkmark .check-icon .icon-line.line-long {
+	      top: 38px;
+	      right: 8px;
+	      width: 47px;
+	      transform: rotate(-45deg);
+	      animation: icon-line-long 0.75s;
+	    }
+	    .success-checkmark .check-icon .icon-circle {
+	      top: -4px;
+	      left: -4px;
+	      z-index: 10;
+	      width: 80px;
+	      height: 80px;
+	      border-radius: 50%;
+	      position: absolute;
+	      box-sizing: content-box;
+	      border: 4px solid rgba(76, 175, 80, 0.5);
+	    }
+	    .success-checkmark .check-icon .icon-fix {
+	      top: 8px;
+	      width: 5px;
+	      left: 26px;
+	      z-index: 1;
+	      height: 85px;
+	      position: absolute;
+	      transform: rotate(-45deg);
+	      /*background-color: #FFFFFF;*/
+	    }
+
+	    @keyframes rotate-circle {
+	      0% {
+	        transform: rotate(-45deg);
+	      }
+	      5% {
+	        transform: rotate(-45deg);
+	      }
+	      12% {
+	        transform: rotate(-405deg);
+	      }
+	      100% {
+	        transform: rotate(-405deg);
+	      }
+	    }
+	    @keyframes icon-line-tip {
+	      0% {
+	        width: 0;
+	        left: 1px;
+	        top: 19px;
+	      }
+	      54% {
+	        width: 0;
+	        left: 1px;
+	        top: 19px;
+	      }
+	      70% {
+	        width: 50px;
+	        left: -8px;
+	        top: 37px;
+	      }
+	      84% {
+	        width: 17px;
+	        left: 21px;
+	        top: 48px;
+	      }
+	      100% {
+	        width: 25px;
+	        left: 14px;
+	        top: 45px;
+	      }
+	    }
+	    @keyframes icon-line-long {
+	      0% {
+	        width: 0;
+	        right: 46px;
+	        top: 54px;
+	      }
+	      65% {
+	        width: 0;
+	        right: 46px;
+	        top: 54px;
+	      }
+	      84% {
+	        width: 55px;
+	        right: 0px;
+	        top: 35px;
+	      }
+	      100% {
+	        width: 47px;
+	        right: 8px;
+	        top: 38px;
+	      }
+	    }
+    </style>
 {% endblock %}
 
 {% block body_web %}
@@ -24,128 +220,154 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-9 col-md-11">
-              <form class="card card-body shadow" data-form-email novalidate action="/forms/smtp.php">
-                <div class="form-row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-name">Name</label>
-                      <input type="text" name="contact-name" class="form-control" id="planner-name" required>
-                      <div class="invalid-feedback">
-                        Please type your name.
+
+
+		<div id="solution-popup">
+			<div class="solution-container shadow">
+				<div class="progress-container">
+					<div id="line-progress" data-stape="1" style="visibility: hidden;"></div>
+					<div class="list-elt-bar">
+						<div class="item-elt-bar shadow active">
+							<div>Personal Details</div>
+						</div>
+						<div class="item-elt-bar shadow">
+							<div>More About You</div>
+						</div>
+						<div class="item-elt-bar shadow">
+							<div>Account Configuration</div>
+						</div>
+						<div class="item-elt-bar shadow">
+							<div>Confirm Your ID</div>
+						</div>
+						<div class="item-elt-bar shadow">
+							<div>Fund your Account</div>
+						</div>
+					</div>
+				</div>
+				<div class="solution-container" style="position: relative;">
+					<div class="lds-ripple"><div></div><div></div></div>
+                    <div class="success-checkmark">
+                      <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-email">Email Address</label>
-                      <input type="email" name="contact-email" class="form-control" id="planner-email" placeholder="you@website.com" required>
-                      <div class="invalid-feedback">
-                        Please provide your email address.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-phone">Phone (optional)</label>
-                      <input type="tel" name="contact-phone" class="form-control" id="planner-phone" required>
-                      <div class="invalid-feedback">
-                        Please provide your phone number.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-industry">Industry</label>
-                      <div class="position-relative">
-                        <select name="select-industry" class="custom-select" id="planner-industry" required>
-                          <option selected value="">Select an option</option>
-                          <option value="Telecommunications">Telecommunications</option>
-                          <option value="Energy">Energy</option>
-                          <option value="Government">Government</option>
-                          <option value="Web Services">Web Services</option>
-                          <option value="Education">Education</option>
-                        </select>
-                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
-                        <div class="invalid-feedback">
-                          Please select an industry.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-company">Company Name</label>
-                      <input type="text" name="company" class="form-control" id="planner-company" required>
-                      <div class="invalid-feedback">
-                        Please provide your company name.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="planner-company-size">Company Size</label>
-                      <div class="position-relative">
-                        <select name="select-company-size" class="custom-select" id="planner-company-size" required>
-                          <option selected value="">Select an option</option>
-                          <option value="1-50">1-50</option>
-                          <option value="50-500">50-500</option>
-                          <option value="500+">500+</option>
-                        </select>
-                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
-                        <div class="invalid-feedback">
-                          Please select your company size.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="planner-message">How can we help?</label>
-                  <textarea name="message" id="planner-message" rows="10" class="form-control" required></textarea>
-                  <div class="invalid-feedback">
-                    Please tell us a bit more about your requirements.
-                  </div>
-                </div>
-                <div class="d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
-                  <div class="custom-control custom-checkbox mb-3 mb-md-0">
-                    <input type="checkbox" class="custom-control-input" id="planner-agree" required>
-                    <label class="custom-control-label" for="planner-agree">I agree to the <a target="_blank" href="utility-legal-terms.html">Terms &amp; Conditions</a>
-                    </label>
-                    <div class="invalid-feedback">
-                      You must agree to the Terms and Conditions.
-                    </div>
-                  </div>
-                  <div class="d-none alert alert-success w-100 my-md-3" role="alert" data-success-message>
-                    Thanks, a member of our team will be in touch shortly.
-                  </div>
-                  <div class="d-none alert alert-danger w-100 my-md-3" role="alert" data-error-message>
-                    Please fill all fields correctly.
-                  </div>
-                  <div data-recaptcha data-sitekey="INSERT_YOUR_RECAPTCHA_V2_SITEKEY_HERE" data-size="invisible" data-badge="bottomleft"></div>
-                  <button class="btn btn-primary btn-loading" type="submit" data-loading-text="Sending">
-                    <!-- Icon for loading animation -->
-                    <svg class="icon bg-white" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <title>Icon For Loading</title>
-                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g>
-                          <polygon points="0 0 24 0 24 24 0 24" opacity="0"></polygon>
-                        </g>
-                        <path d="M12,4 L12,6 C8.6862915,6 6,8.6862915 6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 C18,10.9603196 17.7360885,9.96126435 17.2402578,9.07513926 L18.9856052,8.09853149 C19.6473536,9.28117708 20,10.6161442 20,12 C20,16.418278 16.418278,20 12,20 C7.581722,20 4,16.418278 4,12 C4,7.581722 7.581722,4 12,4 Z"
-                        fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 12.000000) scale(-1, 1) translate(-12.000000, -12.000000) "></path>
-                      </g>
-                    </svg>
-                    <span>Send Message</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+					<div class="solution-stape-list" style="padding: 0 10px;">
+						<div class="stape-item active animated fadeIn">
+							<form class="card card-body" data-form-email novalidate action="/forms/smtp.php">
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-name">Name</label>
+				                      <input type="text" name="contact-name" class="form-control" id="planner-name" required>
+				                      <div class="invalid-feedback">
+				                        Please type your name.
+				                      </div>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-email">Email Address</label>
+				                      <input type="email" name="contact-email" class="form-control" id="planner-email" placeholder="you@website.com" required>
+				                      <div class="invalid-feedback">
+				                        Please provide your email address.
+				                      </div>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-phone">Phone (optional)</label>
+				                      <input type="tel" name="contact-phone" class="form-control" id="planner-phone" required>
+				                      <div class="invalid-feedback">
+				                        Please provide your phone number.
+				                      </div>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-industry">Industry</label>
+				                      <div class="position-relative">
+				                        <select name="select-industry" class="custom-select" id="planner-industry" required>
+				                          <option selected value="">Select an option</option>
+				                          <option value="Telecommunications">Telecommunications</option>
+				                          <option value="Energy">Energy</option>
+				                          <option value="Government">Government</option>
+				                          <option value="Web Services">Web Services</option>
+				                          <option value="Education">Education</option>
+				                        </select>
+				                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+				                        <div class="invalid-feedback">
+				                          Please select an industry.
+				                        </div>
+				                      </div>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-company">Company Name</label>
+				                      <input type="text" name="company" class="form-control" id="planner-company" required>
+				                      <div class="invalid-feedback">
+				                        Please provide your company name.
+				                      </div>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-company-size">Company Size</label>
+				                      <div class="position-relative">
+				                        <select name="select-company-size" class="custom-select" id="planner-company-size" required>
+				                          <option selected value="">Select an option</option>
+				                          <option value="1-50">1-50</option>
+				                          <option value="50-500">50-500</option>
+				                          <option value="500+">500+</option>
+				                        </select>
+				                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
+				                        <div class="invalid-feedback">
+				                          Please select your company size.
+				                        </div>
+				                      </div>
+				                    </div>
+				                  </div>
+				                </div>
+				            </form>
+						</div>
+						<div class="stape-item animated fadeIn">
+							<form>
+								<h1>stape 2</h1>
+							</form>
+						</div>
+						<div class="stape-item animated fadeIn">
+							<form>
+								<h1>stape 3</h1>
+							</form>
+						</div>
+						<div class="stape-item animated fadeIn">
+							<form>
+								<h1>stape 4</h1>
+							</form>
+						</div>
+						<div class="stape-item animated fadeIn">
+							<form>
+								<h1>stape 5</h1>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="stape-nav">
+				 <div class="content-nav-btn">
+				     <span class="btn-prev">BACK</span>
+				     <span class="btn-next">NEXT</span>
+				 </div>
+				</div>
+			</div>
+		</div>
+
         </div>
         <div class="divider divider-bottom bg-white"></div>
       </section>
@@ -185,11 +407,5 @@
 
 {% block javascripts %}
 	{{parent()}}
-	<script type="text/javascript">
-		$('.je-minscris').click( function(e){ 
-		    var speed = 1200; 
-		    $elt = $(this).data('id');
-		    $('html, body').animate({scrollTop:($("#"+$elt).offset().top)-200}, speed);
-		});
-	</script>
+	<script type="text/javascript" src="assets/js/wizard.js"></script>
 {% endblock %}
