@@ -8,9 +8,9 @@
 {% block stylesheets %}
   <!-- Begin loading animation -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
-  <link href="assets/css/loaders/loader-pulse.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="{{ asset('assets/css/loaders/loader-pulse.css')}}" rel="stylesheet" type="text/css" media="all" />
   <!-- End loading animation -->
-  <link href="assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="{{ asset('assets/css/theme.css')}}" rel="stylesheet" type="text/css" media="all" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap" rel="stylesheet">
   <style type="text/css">
       #sfwdt22ddf7{display: none!important;}
@@ -36,7 +36,7 @@
             <div class="col-auto position-absolute right">
                <button type="button" class="close p-0 position-relative" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm bg-white" data-src="assets/img/icons/interface/icon-x.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="injected-svg icon icon-sm bg-white" data-src="{{ asset('assets/img/icons/interface/icon-x.svg')}}" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path d="M18 6L6 18" stroke="#2C3038" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M6 6L18 18" stroke="#2C3038" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                      </svg>
@@ -58,8 +58,8 @@
                <a href="https://wa.me/237656645659" target="_blank" class="btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3" style=" background-color: #009b72; border-color: #009b72; color: #ffffff; "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" style="height: 22px;margin-bottom: 2px;"> 06 85 74 96 12</a>
                <a href="{{path('website_homepage')}}#je-minscris" data-id="je_minscris-form" class="je-minscris btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3">Je m'inscris !</a>
                <button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-                 <img alt="Navbar Toggler Open Icon" class="navbar-toggler-open icon icon-sm" data-inject-svg src="assets/img/icons/interface/icon-menu.svg">
-                 <img alt="Navbar Toggler Close Icon" class="navbar-toggler-close icon icon-sm" data-inject-svg src="assets/img/icons/interface/icon-x.svg">
+                 <img alt="Navbar Toggler Open Icon" class="navbar-toggler-open icon icon-sm" data-inject-svg src="{{ asset('assets/img/icons/interface/icon-menu.svg')}}">
+                 <img alt="Navbar Toggler Close Icon" class="navbar-toggler-close icon icon-sm" data-inject-svg src="{{ asset('assets/img/icons/interface/icon-x.svg')}}">
                </button>
             </div>
             <div class="collapse navbar-collapse order-3 order-lg-2 justify-content-lg-end" id="navigation-menu" style="display: none!important">
@@ -270,7 +270,7 @@
                   <li class="col-12 col-lg-6 col-xl-12 px-0">
                      <div class="row my-2 my-md-3">
                         <a class="col-5" href="#">
-                        <img class="rounded img-fluid hover-fade-out" src="assets/img/blog/thumb-2.jpg" alt="blog.1.image">
+                        <img class="rounded img-fluid hover-fade-out" src="{{ asset('assets/img/blog/thumb-2.jpg')}}" alt="blog.1.image">
                         </a>
                         <div class="col">
                            <a class="h6" href="#">Unveiling our new vision for Jumpstart</a>
@@ -281,7 +281,7 @@
                   <li class="col-12 col-lg-6 col-xl-12 px-0">
                      <div class="row my-2 my-md-3">
                         <a class="col-5" href="#">
-                        <img class="rounded img-fluid hover-fade-out" src="assets/img/blog/thumb-1.jpg" alt="blog.2.image">
+                        <img class="rounded img-fluid hover-fade-out" src="{{ asset('assets/img/blog/thumb-1.jpg')}}" alt="blog.2.image">
                         </a>
                         <div class="col">
                            <a class="h6" href="#">Making the most of team-building sessions</a>
@@ -341,27 +341,27 @@
                <ul class="list-unstyled d-flex mb-0">
                   <li class="mx-3">
                      <a href="#" class="hover-fade-out">
-                     <img src="assets/img/icons/social/dribbble.svg" alt="Dribbble" class="icon icon-xs bg-white" data-inject-svg>
+                     <img src="{{ asset('assets/img/icons/social/dribbble.svg')}}" alt="Dribbble" class="icon icon-xs bg-white" data-inject-svg>
                      </a>
                   </li>
                   <li class="mx-3">
                      <a href="#" class="hover-fade-out">
-                     <img src="assets/img/icons/social/twitter.svg" alt="Twitter" class="icon icon-xs bg-white" data-inject-svg>
+                     <img src="{{ asset('assets/img/icons/social/twitter.svg')}}" alt="Twitter" class="icon icon-xs bg-white" data-inject-svg>
                      </a>
                   </li>
                   <li class="mx-3">
                      <a href="#" class="hover-fade-out">
-                     <img src="assets/img/icons/social/github.svg" alt="Github" class="icon icon-xs bg-white" data-inject-svg>
+                     <img src="{{ asset('assets/img/icons/social/github.svg')}}" alt="Github" class="icon icon-xs bg-white" data-inject-svg>
                      </a>
                   </li>
                   <li class="mx-3">
                      <a href="#" class="hover-fade-out">
-                     <img src="assets/img/icons/social/facebook.svg" alt="Facebook" class="icon icon-xs bg-white" data-inject-svg>
+                     <img src="{{ asset('assets/img/icons/social/facebook.svg')}}" alt="Facebook" class="icon icon-xs bg-white" data-inject-svg>
                      </a>
                   </li>
                   <li class="mx-3">
                      <a href="#" class="hover-fade-out">
-                     <img src="assets/img/icons/social/google.svg" alt="Google" class="icon icon-xs bg-white" data-inject-svg>
+                     <img src="{{ asset('assets/img/icons/social/google.svg')}}" alt="Google" class="icon icon-xs bg-white" data-inject-svg>
                      </a>
                   </li>
                </ul>
@@ -370,56 +370,56 @@
       </div>
    </footer>
    <a href="#top" class="btn btn-primary rounded-circle btn-back-to-top" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
-   <img src="assets/img/icons/interface/icon-arrow-up.svg" alt="Icon" class="icon bg-white" data-inject-svg>
+   <img src="{{ asset('assets/img/icons/interface/icon-arrow-up.svg')}}" alt="Icon" class="icon bg-white" data-inject-svg>
    </a>
 {% endblock %}
 
 {% block javascripts %}
   <!-- Required vendor scripts (Do not remove) -->
-  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/popper.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/popper.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/bootstrap.js')}}"></script>
 
   <!-- Optional Vendor Scripts (Remove the plugin script here and comment initializer script out of index.js if site does not use that feature) -->
 
   <!-- AOS (Animate On Scroll - animates elements into view while scrolling down) -->
-  <script type="text/javascript" src="assets/js/aos.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/aos.js')}}"></script>
   <!-- Clipboard (copies content from browser into OS clipboard) -->
-  <script type="text/javascript" src="assets/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/clipboard.min.js')}}"></script>
   <!-- Fancybox (handles image and video lightbox and galleries) -->
-  <script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jquery.fancybox.min.js')}}"></script>
   <!-- Flatpickr (calendar/date/time picker UI) -->
-  <script type="text/javascript" src="assets/js/flatpickr.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/flatpickr.min.js')}}"></script>
   <!-- Flickity (handles touch enabled carousels and sliders) -->
-  <script type="text/javascript" src="assets/js/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/flickity.pkgd.min.js')}}"></script>
   <!-- Ion rangeSlider (flexible and pretty range slider elements) -->
-  <script type="text/javascript" src="assets/js/ion.rangeSlider.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/ion.rangeSlider.min.js')}}"></script>
   <!-- Isotope (masonry layouts and filtering) -->
-  <script type="text/javascript" src="assets/js/isotope.pkgd.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/isotope.pkgd.min.js')}}"></script>
   <!-- jarallax (parallax effect and video backgrounds) -->
-  <script type="text/javascript" src="assets/js/jarallax.min.js"></script>
-  <script type="text/javascript" src="assets/js/jarallax-video.min.js"></script>
-  <script type="text/javascript" src="assets/js/jarallax-element.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jarallax.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jarallax-video.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jarallax-element.min.js')}}"></script>
   <!-- jQuery Countdown (displays countdown text to a specified date) -->
-  <script type="text/javascript" src="assets/js/jquery.countdown.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jquery.countdown.min.js')}}"></script>
   <!-- jQuery smartWizard facilitates steppable wizard content -->
-  <script type="text/javascript" src="assets/js/jquery.smartWizard.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/jquery.smartWizard.min.js')}}"></script>
   <!-- Plyr (unified player for Video, Audio, Vimeo and Youtube) -->
-  <script type="text/javascript" src="assets/js/plyr.polyfilled.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/plyr.polyfilled.min.js')}}"></script>
   <!-- Prism (displays formatted code boxes) -->
-  <script type="text/javascript" src="assets/js/prism.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/prism.js')}}"></script>
   <!-- ScrollMonitor (manages events for elements scrolling in and out of view) -->
-  <script type="text/javascript" src="assets/js/scrollMonitor.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/scrollMonitor.js')}}"></script>
   <!-- Smooth scroll (animation to links in-page)-->
-  <script type="text/javascript" src="assets/js/smooth-scroll.polyfills.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/smooth-scroll.polyfills.min.js')}}"></script>
   <!-- SVGInjector (replaces img tags with SVG code to allow easy inclusion of SVGs with the benefit of inheriting colors and styles)-->
-  <script type="text/javascript" src="assets/js/svg-injector.umd.production.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/svg-injector.umd.production.js')}}"></script>
   <!-- TwitterFetcher (displays a feed of tweets from a specified account)-->
-  <script type="text/javascript" src="assets/js/twitterFetcher_min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/twitterFetcher_min.js')}}"></script>
   <!-- Typed text (animated typing effect)-->
-  <script type="text/javascript" src="assets/js/typed.min.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/typed.min.js')}}"></script>
   <!-- Required theme scripts (Do not remove) -->
-  <script type="text/javascript" src="assets/js/theme.js"></script>
+  <script type="text/javascript" src="{{ asset('assets/js/theme.js')}}"></script>
   <!-- Removes page load animation when window is finished loading -->
   <script type="text/javascript">
     window.addEventListener("load",function(){

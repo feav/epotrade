@@ -1,5 +1,5 @@
 {% extends 'website/layout.html.twig' %}
-{% block title %} {{parent()}} | Accueil {% endblock %}
+{% block title %} {{parent()}} | Inscription {% endblock %}
 {% block meta %}
     <meta name="description" content="">
 {% endblock %}
@@ -8,18 +8,17 @@
 
 {% block stylesheets %}
 	{{parent()}}
-    <link href="assets/css/wizard.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('assets/css/wizard.css')}}" rel="stylesheet" type="text/css" media="all" />
     <style type="text/css">
     	.lds-ripple {
 	        display: none;
 	        width: 80px;
 	        height: 80px;
 	        position: absolute;
-	        top: 40%;
+	        top: 11rem;
 	        left: 0;
 	        right: 0;
 	        margin: auto;
-	        transform: translateY(-50%);
 	        z-index: 50;
 	    }
 	    .lds-ripple div {
@@ -209,7 +208,6 @@
 
 {% block body_web %}
 
-	<div class="bg-gradient p-0 o-hidden" data-overlay>
       <section class="pb-0" style="padding-top:3.5rem">
         <div class="container">
           <div class="text-white">
@@ -223,7 +221,7 @@
 
 
 		<div id="solution-popup">
-			<div class="solution-container shadow">
+			<div class="solution-container shadow" >
 				<div class="progress-container">
 					<div id="line-progress" data-stape="1" style="visibility: hidden;"></div>
 					<div class="list-elt-bar">
@@ -256,53 +254,48 @@
                     </div>
 					<div class="solution-stape-list" style="padding: 0 10px;">
 						<div class="stape-item active animated fadeIn">
-							<form class="card card-body" data-form-email novalidate action="/forms/smtp.php">
+							<div class="wiz-header">
+								<h2 class="title">EMPLOI ET DÉTAILS FINANCIERS</h2>
+								<hr class="underline-title">
+							</div>
+							<div class="wiz-top-desc">
+								<p>
+									Les questions suivantes sont collectées pour la conformité aux exigences AML / CTF.
+								</p>
+							</div>
+							<form class="card card-body" data-form-email novalidate action="">
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-name">Name</label>
-				                      <input type="text" name="contact-name" class="form-control" id="planner-name" required>
-				                      <div class="invalid-feedback">
-				                        Please type your name.
-				                      </div>
+				                      <label for="planner-name">Prenom</label>
+				                      <input type="text" name="prenom" class="form-control" id="prenom" required>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-email">Email Address</label>
-				                      <input type="email" name="contact-email" class="form-control" id="planner-email" placeholder="you@website.com" required>
-				                      <div class="invalid-feedback">
-				                        Please provide your email address.
-				                      </div>
+				                      <label for="planner-email">Deuxieme nom</label>
+				                      <input type="text" name="second-name" class="form-control" id="second-name" placeholder="" required>
 				                    </div>
 				                  </div>
 				                </div>
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-phone">Phone (optional)</label>
-				                      <input type="tel" name="contact-phone" class="form-control" id="planner-phone" required>
-				                      <div class="invalid-feedback">
-				                        Please provide your phone number.
-				                      </div>
+				                      <label for="planner-email">Nom</label>
+				                      <input type="text" name="nom" class="form-control" id="nom" placeholder="" required>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-industry">Industry</label>
+				                      <label for="planner-industry">Nationalité</label>
 				                      <div class="position-relative">
 				                        <select name="select-industry" class="custom-select" id="planner-industry" required>
-				                          <option selected value="">Select an option</option>
-				                          <option value="Telecommunications">Telecommunications</option>
-				                          <option value="Energy">Energy</option>
-				                          <option value="Government">Government</option>
-				                          <option value="Web Services">Web Services</option>
-				                          <option value="Education">Education</option>
+				                          <option selected value="">Selectionner une option</option>
+				                          <option value="Telecommunications">Francaise</option>
+				                          <option value="Energy">Allemande</option>
+				                          <option value="Government">Belge</option>
+				                          <option value="Web Services">Swisse</option>
 				                        </select>
-				                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
-				                        <div class="invalid-feedback">
-				                          Please select an industry.
-				                        </div>
 				                      </div>
 				                    </div>
 				                  </div>
@@ -310,41 +303,369 @@
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-company">Company Name</label>
-				                      <input type="text" name="company" class="form-control" id="planner-company" required>
-				                      <div class="invalid-feedback">
-				                        Please provide your company name.
-				                      </div>
+				                      <label for="email">Email</label>
+				                      <input type="email" name="email" class="form-control" id="email" placeholder="" required>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-company-size">Company Size</label>
-				                      <div class="position-relative">
-				                        <select name="select-company-size" class="custom-select" id="planner-company-size" required>
-				                          <option selected value="">Select an option</option>
-				                          <option value="1-50">1-50</option>
-				                          <option value="50-500">50-500</option>
-				                          <option value="500+">500+</option>
-				                        </select>
-				                        <img src="assets/img/icons/interface/icon-caret-down.svg" alt="Arrow Down" class="icon icon-sm">
-				                        <div class="invalid-feedback">
-				                          Please select your company size.
-				                        </div>
-				                      </div>
+				                      <label for="phone">Telephone</label>
+				                      <input type="text" name="phone" class="form-control" id="phone" placeholder="Ex:+330685749612" required>
 				                    </div>
 				                  </div>
 				                </div>
+				                <div class="form-row">
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                      <label for="planner-industry">Date de naissance</label>
+					                      <div class="position-relative list-elt-birth">
+					                        <div class="elt-birth">
+					                        	<select name="birth-jour" class="custom-select" id="birth-jour" required>
+					                        		<option value="" disabled>Jour</option>
+					                        		{% for i in 1..31 %}
+					                        		    <option value="{{i}}">{{i}}</option>
+					                        		{% endfor %}
+						                        </select>
+					                        </div>
+					                        <div class="elt-birth" style="flex: 2">
+					                        	<select name="select_industry" class="custom-select" id="planner_industry" required>
+						                          <option value="" disabled>Mois</option>
+						                          <option value="Telecommunications">Francaise</option>
+						                          <option value="Energy">Allemande</option>
+						                          <option value="Government">Belge</option>
+						                          <option value="Web Services">Swisse</option>
+						                        </select>
+					                        </div>
+					                        <div class="elt-birth">
+					                        	<select name="birth-jour" class="custom-select" id="birth-jour" required>
+					                        		<option value="" disabled>Année</option>
+					                        		{% for i in 1987..2002 %}
+					                        		    <option value="{{i}}">{{i}}</option>
+					                        		{% endfor %}
+						                        </select>
+					                        </div>
+					                      </div>
+					                    </div>
+					                </div>
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                      <label for="planner-email">Lieu de naissance</label>
+					                      <input type="text" name="birth_place" class="form-control" id="birth_place" placeholder="" required>
+					                    </div>
+					                </div>
+				                </div>
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="ident_type">Type d'identification</label>
+				                      <select name="ident_type" class="custom-select" id="ident_type" required>
+				                          <option value="Telecommunications">CNI</option>
+				                          <option value="Energy">Passeport</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="planner-email">Numero d'indentification</label>
+				                      <input type="text" name="ident_number" class="form-control" id="ident_number" placeholder="" required>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="form-row">
+				                	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
+						                <div class="custom-control custom-checkbox mb-3 mb-md-0">
+						                    <input type="checkbox" class="custom-control-input" id="planner-agree" required="">
+						                    <label class="custom-control-label" for="planner-agree">I agree to the <a target="_blank" href="javascript:void()">Terms &amp; Conditions</a>
+						                    </label>
+						                </div>
+					                </div>
+					            </div>
 				            </form>
 						</div>
 						<div class="stape-item animated fadeIn">
-							<form>
-								<h1>stape 2</h1>
+							<div class="wiz-header">
+								<h2 class="title">EMPLOYMENT AND FINANCIAL DETAILS</h2>
+								<hr class="underline-title">
+							</div>
+							<div class="wiz-top-desc">
+								<p>
+									The following questions are collected for compliance with AML/CTF requirements.
+								</p>
+							</div>
+							<form class="card card-body" name="apropos_vous" id="apropos_vous">
+								<div class="form-content">
+									<div class="row-infos">
+										<div class="info-label">
+											Statut d'emploi 
+										</div>
+										<div class="list-inner-elt">
+											<input id="employe" type="radio" name="statut_emploi" value="Employé">
+											<label class="item-elt label-form" for="employe">Employé</label>
+											<input id="travaileur_independant" type="radio" name="statut_emploi" value="Travailleur indépendant">
+											<label for="travaileur_independant" class="item-elt label-form">Travailleur indépendant</label>
+											<input id="retraite" type="radio" name="statut_emploi" value="Retraité">
+											<label for="retraite" class="item-elt label-form">Retraité</label>
+											<input id="etudiant" type="radio" name="statut_emploi" value="Étudiant">
+											<label for="etudiant" class="item-elt label-form">Étudiant</label>
+											<input id="sans_emploi" type="radio" name="statut_emploi" value="Sans emploi">
+											<label for="sans_emploi" class="item-elt label-form">Sans emploi</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Revenu annuel estimé 
+										</div>
+										<div class="list-inner-elt">
+											<input id="revenu_1" type="radio" name="revenue_annuel" value="0 - 18 200 $">
+											<label class="item-elt label-form" for="revenu_1">0 - 18 200 $</label>
+											<input id="revenu_2" type="radio" name="revenue_annuel" value="18 201 $ - 37 000 $">
+											<label for="revenu_2" class="item-elt label-form">18 201 $ - 37 000 $</label>
+											<input id="revenu_3" type="radio" name="revenue_annuel" value="37 001 $ - 90 000 $">
+											<label for="revenu_3" class="item-elt label-form">37 001 $ - 90 000 $</label>
+											<input id="revenu_4" type="radio" name="revenue_annuel" value="90 001 $ - 180 000 $">
+											<label for="revenu_4" class="item-elt label-form">90 001 $ - 180 000 $</label>
+											<input id="revenu_5" type="radio" name="revenue_annuel" value="180 000 $ et plus">
+											<label for="revenu_5" class="item-elt label-form">180 000 $ et plus</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Économies et investissements estimés
+										</div>
+										<div class="list-inner-elt">
+											<input id="economie_1" type="radio" name="invest_economie" value="Moins de 25 000 $">
+											<label class="item-elt label-form" for="economie_1">Moins de 25 000 $</label>
+											<input id="economie_2" type="radio" name="invest_economie" value="25 000 $ - 50 000 $">
+											<label for="economie_2" class="item-elt label-form">25 000 $ - 50 000 $</label>
+											<input id="economie_3" type="radio" name="invest_economie" value="50 000 $ - 100 000 $">
+											<label for="economie_3" class="item-elt label-form">50 000 $ - 100 000 $</label>
+											<input id="economie_4" type="radio" name="invest_economie" value="101 000 $ - 250 000 $">
+											<label for="economie_4" class="item-elt label-form">101 000 $ - 250 000 $</label>
+											<input id="economie_5" type="radio" name="invest_economie" value="251 K $ - 1 M $">
+											<label for="economie_5" class="item-elt label-form">251 K $ - 1 M $</label>
+											<input id="economie_6" type="radio" name="invest_economie" value="1 M $ à 5 M $">
+											<label for="economie_6" class="item-elt label-form">1 M $ à 5 M $</label>
+											<input id="economie_7" type="radio" name="invest_economie" value="5 M $ - 10 M $">
+											<label for="economie_7" class="item-elt label-form">5 M $ - 10 M $</label>
+											<input id="economie_8" type="radio" name="invest_economie" value="10 M $ +">
+											<label for="economie_8" class="item-elt label-form">10 M $ +</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Dépôt prévu estimé
+										</div>
+										<div class="list-inner-elt">
+											<input id="depot_1" type="radio" name="depot" value="0 à 5 000 $">
+											<label class="item-elt label-form" for="depot_1">0 à 5 000 $</label>
+											<input id="depot_2" type="radio" name="depot" value="5 000 $ - 50 000 $">
+											<label for="depot_2" class="item-elt label-form">5 000 $ - 50 000 $</label>
+											<input id="depot_3" type="radio" name="depot" value="50 000 $ - 100 000 $">
+											<label for="depot_3" class="item-elt label-form">50 000 $ - 100 000 $</label>
+											<input id="depot_4" type="radio" name="depot" value="101 000 $ - 250 000 $">
+											<label for="depot_4" class="item-elt label-form">101 000 $ - 250 000 $</label>
+											<input id="depot_5" type="radio" name="depot" value="251 000 $ - 500 000 $">
+											<label for="depot_5" class="item-elt label-form">251 000 $ - 500 000 $</label>
+											<input id="depot_6" type="radio" name="depot" value="501 K $ - 1 M $">
+											<label for="depot_6" class="item-elt label-form">501 K $ - 1 M $</label>
+											<input id="depot_7" type="radio" name="depot" value="1 M $ +">
+											<label for="depot_7" class="item-elt label-form">1 M $ +</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Source de fonds
+										</div>
+										<div class="list-inner-elt">
+											<input id="source_fond_1" type="radio" name="source_fond" value="Revenu familial">
+											<label class="item-elt label-form" for="source_fond_1">Revenu familial</label>
+											<input id="source_fond_2" type="radio" name="source_fond" value="Un ami">
+											<label for="source_fond_2" class="item-elt label-form">Un ami</label>
+											<input id="source_fond_3" type="radio" name="source_fond" value="Cadeau">
+											<label for="source_fond_3" class="item-elt label-form">Cadeau</label>
+											<input id="source_fond_4" type="radio" name="source_fond" value="Soutien gouvernemental / sécurité sociale">
+											<label for="source_fond_4" class="item-elt label-form">Soutien gouvernemental / sécurité sociale</label>
+											<input id="source_fond_5" type="radio" name="source_fond" value="Héritage">
+											<label for="source_fond_5" class="item-elt label-form">Héritage</label>
+											<input id="source_fond_6" type="radio" name="source_fond" value="Investissements / dividendes">
+											<label for="source_fond_6" class="item-elt label-form">Investissements / dividendes</label>
+											<input id="source_fond_7" type="radio" name="source_fond" value="Prêt">
+											<label for="source_fond_7" class="item-elt label-form">Prêt</label>
+											<input id="source_fond_8" type="radio" name="source_fond" value="Pension">
+											<label for="source_fond_8" class="item-elt label-form">Pension</label>
+											<input id="source_fond_9" type="radio" name="source_fond" value="Revenus locatifs">
+											<label for="source_fond_9" class="item-elt label-form">Revenus locatifs</label>
+											<input id="source_fond_10" type="radio" name="source_fond" value="Vente de biens / revenus immobiliers">
+											<label for="source_fond_10" class="item-elt label-form">Vente de biens / revenus immobiliers</label>
+											<input id="source_fond_11" type="radio" name="source_fond" value="Économies grâce à un emploi antérieur">
+											<label for="source_fond_11" class="item-elt label-form">Économies grâce à un emploi antérieur</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="wiz-header">
+										<h2 class="title">CONNAISSANCES ET EXPÉRIENCE COMMERCIALES</h2>
+										<hr class="underline-title">
+									</div>
+									<div class="wiz-top-desc">
+									</div>
+
+									<div class="row-infos">
+										<div class="info-label">
+											Nombre de transactions par semaine
+										</div>
+										<div class="list-inner-elt">
+											<input id="transaction_1" type="radio" name="transaction" value="pas de métiers">
+											<label class="item-elt label-form" for="transaction_1">pas de métiers</label>
+											<input id="transaction_2" type="radio" name="transaction" value="1 à 15 métiers">
+											<label for="transaction_2" class="item-elt label-form">1 à 15 métiers</label>
+											<input id="transaction_3" type="radio" name="transaction" value="16-30 métiers">
+											<label for="transaction_3" class="item-elt label-form">16-30 métiers</label>
+											<input id="transaction_4" type="radio" name="transaction" value="31 - 50 métiers">
+											<label for="transaction_4" class="item-elt label-form">31 - 50 métiers</label>
+											<input id="transaction_5" type="radio" name="transaction" value="180 000 $ et plus">
+											<label for="transaction_5" class="item-elt label-form">180 000 $ et plus</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Quantité d'échange par semaine 
+										</div>
+										<div class="list-inner-elt">
+											<input id="qte_echange_1" type="radio" name="qte_echange" value="0 $">
+											<label class="item-elt label-form" for="qte_echange_1">0 $</label>
+											<input id="qte_echange_2" type="radio" name="qte_echange" value="1 $ - 1 000 $">
+											<label for="qte_echange_2" class="item-elt label-form">1 $ - 1 000 $</label>
+											<input id="qte_echange_3" type="radio" name="qte_echange" value="1 000 $ - 2 500 $">
+											<label for="qte_echange_3" class="item-elt label-form">1 000 $ - 2 500 $</label>
+											<input id="qte_echange_4" type="radio" name="qte_echange" value="2,5 K $ +">
+											<label for="qte_echange_4" class="item-elt label-form">2,5 K $ +</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+								</div>
 							</form>
 						</div>
 						<div class="stape-item animated fadeIn">
-							<form>
-								<h1>stape 3</h1>
+							<div class="wiz-header">
+								<h2 class="title">CONFIGURATION DU COMPTE</h2>
+								<hr class="underline-title">
+							</div>
+							<div class="wiz-top-desc"></div>
+							<form class="card card-body" name="apropos_vous" id="apropos_vous">
+								<div class="form-content">
+									<div class="row-infos">
+										<div class="info-label">
+											Choisissez la plateforme de trading 
+										</div>
+										<div class="list-inner-elt img-list-container">
+											<input id="trade_4" type="radio" name="trading_plateform" value="trade_4">
+											<label class="item-elt label-form" for="trade_4">
+												<img src="{{asset('images/meta_4.png')}}">
+											</label>
+											<input id="trade_5" type="radio" name="trading_plateform" value="trade_5">
+											<label class="item-elt label-form" for="trade_5">
+												<img src="{{asset('images/meta_5.png')}}">
+											</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+
+									<div class="row-infos">
+										<div class="info-label">
+											Choisissez le type de compte 
+										</div>
+										<div class="list-inner-elt img-list-container">
+											<input id="account_1" type="radio" name="account_type" value="account_1">
+											<label class="item-elt label-form" for="account_1">
+												<img src="{{asset('images/stardard_1.png')}}">
+											</label>
+											<input id="account_2" type="radio" name="account_type" value="account_2">
+											<label class="item-elt label-form" for="account_2">
+												<img src="{{asset('images/raw_1.png')}}">
+											</label>
+											<input id="account_3" type="radio" name="account_type" value="account_3">
+											<label class="item-elt label-form" for="account_3">
+												<img src="{{asset('images/swap_2.png')}}">
+											</label>
+											<input id="account_4" type="radio" name="account_type" value="account_4">
+											<label class="item-elt label-form" for="account_4">
+												<img src="{{asset('images/swap_1.png')}}">
+											</label>
+										</div>
+									</div>
+									<hr class="separate-row-infos">
+									<div class="row-infos">
+										<div class="info-label">
+											Choisissez la devise du compte
+										</div>
+										<div class="list-inner-elt img-list-container devise">
+											<input id="usd" type="radio" name="devise" value="usd">
+											<label class="item-elt label-form" for="usd">
+												<img src="{{asset('images/usd.png')}}">
+												<span class="devise">$usd</span>
+											</label>
+											<input id="gbp" type="radio" name="devise" value="gbp">
+											<label class="item-elt label-form" for="gbp">
+												<img src="{{asset('images/gbp.png')}}">
+												<span class="devise">€gbp</span>
+											</label>
+											<input id="cad" type="radio" name="devise" value="cad">
+											<label class="item-elt label-form" for="cad">
+												<img src="{{asset('images/cad.png')}}">
+												<span class="devise">$cad</span>
+											</label>
+											<input id="aus" type="radio" name="devise" value="aus">
+											<label class="item-elt label-form" for="aus">
+												<img src="{{asset('images/aus.png')}}">
+												<span class="devise">$aus</span>
+											</label>
+											<input id="eur" type="radio" name="devise" value="eur">
+											<label class="item-elt label-form" for="eur">
+												<img src="{{asset('images/eur.png')}}">
+												<span class="devise">€eur</span>
+											</label>
+											<input id="sgd" type="radio" name="devise" value="sgd">
+											<label class="item-elt label-form" for="sgd">
+												<img src="{{asset('images/sgd.png')}}" style="border:1px solid #d91e43">
+												<span class="devise">$sgd</span>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="card card-body shadow CGU_container">
+									<div class="form-row">
+					                	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
+							                <div class="custom-control custom-checkbox mb-3 mb-md-0">
+							                    <input type="checkbox" class="custom-control-input" id="cgu_2" required="">
+							                    <label class="custom-control-label" for="cgu_2">En cochant cette case <a class="link" target="_blank" href="javascript:void()"><small style="color: red">veuillez accepter les conditions générales.</small></a>
+							                    </label>
+							                </div>
+						                </div>
+						            </div>
+						            <div>
+										<p class="cgu_container-text">
+											1. I acknowledge I have read and understood the Risk Warning Notice which is provided online as part of this application. I understand that Key Information Documents are available to me on the Vantage International Group Limited (“Epo trading”) website..
+											2. I acknowledge that I have read, understood and accept the Epo trading Client Agreement provided online as part of this application.
+											3. I understand that Epo trading will not provide me with any investment advice on transactions.
+											4. I also confirm that I have read, understood and agree to be bound by Epo trading Best Execution Policy, Conflicts of Interest Policy and Privacy Policy.
+											5. I understand that personal information submitted as part of this application will be used to verify my identity with a third-party authentication service.
+											6. I confirm that the information provided by me and inserted in this form is correct and that I acknowledge that I shall be obliged to inform Epo trading immediately in case of any changes to this information.
+											7. I confirm that I have acted in my own name as specified in this application and not on behalf of a third party in respect of all matters related to this client relationship. Accordingly, all funds to be deposited and traded in on the account with Epo trading are my own funds.
+											8. I confirm that the intended deposit amount chosen by me takes into account my total financial circumstances and is considered by me to be responsible under such circumstances.I understand the inherent risks of trading FX and CFDs and that due to the risky nature of the product I may lose more than my deposit.
+										</p>
+									</div>
+								</div>
 							</form>
 						</div>
 						<div class="stape-item animated fadeIn">
@@ -371,7 +692,6 @@
         </div>
         <div class="divider divider-bottom bg-white"></div>
       </section>
-    </div>
     <section>
       <div class="container">
         <div class="row justify-content-center text-center">
@@ -407,5 +727,12 @@
 
 {% block javascripts %}
 	{{parent()}}
-	<script type="text/javascript" src="assets/js/wizard.js"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/wizard.js')}}"></script>
+	<script type="text/javascript">
+		$('.btn-prev, .btn-next').click( function(e){ 
+		    var speed = 800; 
+		    $elt = $(this).data('id');
+		    $('html, body').animate({scrollTop:($("#solution-popup").offset().top)-20}, speed);
+		});
+	</script>
 {% endblock %}
