@@ -207,7 +207,7 @@
 {% endblock %}
 
 {% block body_web %}
-
+	{%  set mois = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'] %}
 	<div class="bg-gradient p-0 o-hidden" data-overlay>
       <section class="pb-0" style="padding-top:3.5rem">
         <div class="container">
@@ -219,8 +219,6 @@
               </div>
             </div>
           </div>
-
-
 		<div id="solution-popup">
 			<div class="solution-container shadow" >
 				<div class="progress-container">
@@ -256,25 +254,21 @@
 					<div class="solution-stape-list" style="padding: 0 10px;">
 						<div class="stape-item active animated fadeIn">
 							<div class="wiz-header">
-								<h2 class="title">EMPLOI ET DÉTAILS FINANCIERS</h2>
+								<h2 class="title">ADRESSE RÉSIDENTIELLE PRINCIPALE</h2>
 								<hr class="underline-title">
 							</div>
-							<div class="wiz-top-desc">
-								<p>
-									Les questions suivantes sont collectées pour la conformité aux exigences AML / CTF.
-								</p>
-							</div>
-							<form class="card card-body" data-form-email novalidate action="">
+							<div class="wiz-top-desc"></div>
+							<form class="card card-body" action="">
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-name">Prenom</label>
+				                      <label for="planner-name">Prénom</label>
 				                      <input type="text" name="prenom" class="form-control" id="prenom" required>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-email">Deuxieme nom</label>
+				                      <label for="planner-email">Deuxième nom</label>
 				                      <input type="text" name="second-name" class="form-control" id="second-name" placeholder="" required>
 				                    </div>
 				                  </div>
@@ -282,7 +276,7 @@
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-email">Nom</label>
+				                      <label for="planner-email">Nom de famille</label>
 				                      <input type="text" name="nom" class="form-control" id="nom" placeholder="" required>
 				                    </div>
 				                  </div>
@@ -291,7 +285,6 @@
 				                      <label for="planner-industry">Nationalité</label>
 				                      <div class="position-relative">
 				                        <select name="select-industry" class="custom-select" id="planner-industry" required>
-				                          <option selected value="">Selectionner une option</option>
 				                          <option value="Telecommunications">Francaise</option>
 				                          <option value="Energy">Allemande</option>
 				                          <option value="Government">Belge</option>
@@ -304,13 +297,13 @@
 				                <div class="form-row">
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="email">Email</label>
+				                      <label for="email">E-mail</label>
 				                      <input type="email" name="email" class="form-control" id="email" placeholder="" required>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="phone">Telephone</label>
+				                      <label for="phone">Numéro de téléphone</label>
 				                      <input type="text" name="phone" class="form-control" id="phone" placeholder="Ex:+330685749612" required>
 				                    </div>
 				                  </div>
@@ -330,11 +323,9 @@
 					                        </div>
 					                        <div class="elt-birth" style="flex: 2">
 					                        	<select name="select_industry" class="custom-select" id="planner_industry" required>
-						                          <option value="" disabled>Mois</option>
-						                          <option value="Telecommunications">Francaise</option>
-						                          <option value="Energy">Allemande</option>
-						                          <option value="Government">Belge</option>
-						                          <option value="Web Services">Swisse</option>
+					                        		{% for m in mois %}
+					                        			<option value="{{m}}">{{m}}</option>
+					                        		{% endfor %}
 						                        </select>
 					                        </div>
 					                        <div class="elt-birth">
@@ -360,14 +351,14 @@
 				                    <div class="form-group">
 				                      <label for="ident_type">Type d'identification</label>
 				                      <select name="ident_type" class="custom-select" id="ident_type" required>
-				                          <option value="Telecommunications">CNI</option>
-				                          <option value="Energy">Passeport</option>
+				                          <option value="cni">Carte Nationale ID</option>
+				                          <option value="passport">Passport</option>
 				                      </select>
 				                    </div>
 				                  </div>
 				                  <div class="col-sm-6">
 				                    <div class="form-group">
-				                      <label for="planner-email">Numero d'indentification</label>
+				                      <label for="planner-email">Numéro d'identité avec photo</label>
 				                      <input type="text" name="ident_number" class="form-control" id="ident_number" placeholder="" required>
 				                    </div>
 				                  </div>
@@ -376,11 +367,58 @@
 				                	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
 						                <div class="custom-control custom-checkbox mb-3 mb-md-0">
 						                    <input type="checkbox" class="custom-control-input" id="planner-agree" required="">
-						                    <label class="custom-control-label" for="planner-agree">I agree to the <a target="_blank" href="javascript:void()">Terms &amp; Conditions</a>
+						                    <label class="custom-control-label" for="planner-agree">Avez-vous été référé par quelqu'un ? (optionnel)
 						                    </label>
 						                </div>
 					                </div>
 					            </div>
+
+					            <div class="wiz-header" style="margin-top: 4rem">
+								<h2 class="title">ADRESSE RÉSIDENTIELLE PRINCIPALE</h2>
+								<hr class="underline-title">
+								</div>
+								<div class="wiz-top-desc" style="margin-top: 0"></div>
+								<div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="ident_type">Pays de résidence principale</label>
+				                      <select name="pays_residence" class="custom-select" id="pays_residence" required>
+				                          <option value="france">Francaise</option>
+				                          <option value="Energy">Allemande</option>
+				                          <option value="Government">Belge</option>
+				                          <option value="Web Services">Swisse</option>
+				                      </select>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="adresse">Adresse</label>
+				                      <input type="text" name="adresse" class="form-control" id="adresse" placeholder="" required>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="province">Province / Etat</label>
+				                      <input type="text" name="province" class="form-control" id="province" placeholder="" required>
+				                    </div>
+				                  </div>
+				                </div>
+				                <div class="form-row">
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="ville">Ville</label>
+				                      <input type="text" name="ville" class="form-control" id="ville" placeholder="" required>
+				                    </div>
+				                  </div>
+				                  <div class="col-sm-6">
+				                    <div class="form-group">
+				                      <label for="codepostal">Code postal</label>
+				                      <input type="text" name="codepostal" class="form-control" id="codepostal" placeholder="" required>
+				                    </div>
+				                  </div>
+				                </div>
 				            </form>
 						</div>
 						<div class="stape-item animated fadeIn">
@@ -670,8 +708,68 @@
 							</form>
 						</div>
 						<div class="stape-item animated fadeIn">
-							<form>
-								<h1>stape 4</h1>
+							<div class="wiz-header">
+								<h2 class="title">CONFIRMEZ VOTRE IDENTIFIANT</h2>
+								<hr class="underline-title">
+							</div>
+							<div class="wiz-top-desc">
+								<p>
+									En tant que courtier forex réglementé, nous sommes tenus de vérifier votre identité. Veuillez télécharger l'un des documents suivants pour votre vérification de preuve d'identité et de preuve d'adresse. Vous pouvez également envoyer vos documents de vérification par e-mail à <a href="mailto:epdrading@epdrading.com">epdrading@epdrading.com</a>
+								</p>
+							</div>
+							<form  id="identiteForm" name="identiteForm" class="" action="">
+								<div class="title-load-doc">Preuve d'identité en<span class="alert-msg loaded" style="font-style: italic;"> attente de téléchargement</span></div>
+								<div class="text-guide">Choisissez un type de document et téléchargez en conséquence</div>
+								<div class="piece-load-wrapper">
+									<div class="img-type_piece">
+										<img src="{{asset('images/thumb_profile.png')}}">
+										<ul class="type-piece">
+											<li class="piece-item">photo d'identité</li>
+											<li class="piece-item">Passeport</li>
+											<li class="piece-item">Permis de conduire</li>
+										</ul>
+									</div>
+									<div class="wrap-load-action">
+										<input type="file" name="identite" id="identite" style="display: none;">
+										<label for="identite" class="label-identite loaded">
+											<div class="content-waiting">
+												<i class="fa fa-upload"></i><br>
+												<span style="display: block;line-height: 12px;">Télécharger</span>
+											</div>
+											<div class="content-loaded">
+												<i class="fa fa-file"></i>
+												<span style="display: block;line-height: 12px;">doc... <i class="fa fa-check-circle"></i></span>
+											</div>
+										</label>	
+									</div>
+								</div>
+								<div class="text-important" style="color: #e40606">
+									IMPORTANT: Le nom sur le document DOIT clairement indiquer votre nom complet.
+								</div>
+								<hr class="underline-title" style="border-top: 1px solid rgb(221, 221, 222)">
+
+								<div class="title-load-doc">Preuve de résidence en <span class="alert-msg" style="font-style: italic;">attente de téléchargement</span></div>
+								<div class="text-guide">Choisissez un type de document et téléchargez en conséquence</div>
+								<div class="piece-load-wrapper">
+									<div class="img-type_piece">
+										<img src="{{asset('images/thumb_doc.png')}}">
+										<ul class="type-piece">
+											<li class="piece-item">Facture d'utilité</li>
+											<li class="piece-item">Relevé bancaire</li>
+											<li class="piece-item">Certificat de résidence</li>
+										</ul>
+									</div>
+									<div class="wrap-load-action">
+										<input type="file" name="residence" id="residence" style="display: none;">
+										<label for="residence" class="label-identite">
+											<i class="fa fa-upload"></i><br>
+											<span style="display: block;line-height: 12px;">Télécharger</span>
+										</label>	
+									</div>
+								</div>
+								<div class="text-important" style="color: #e40606">
+									IMPORTANT: Le nom sur le document DOIT clairement indiquer votre nom complet.
+								</div>
 							</form>
 						</div>
 						<div class="stape-item animated fadeIn">
@@ -734,7 +832,7 @@
 		$('.btn-prev, .btn-next').click( function(e){ 
 		    var speed = 800; 
 		    $elt = $(this).data('id');
-		    $('html, body').animate({scrollTop:($("#solution-popup").offset().top)-20}, speed);
+		    $('html, body').animate({scrollTop:($("#solution-popup").offset().top)-50}, speed);
 		});
 	</script>
 {% endblock %}
