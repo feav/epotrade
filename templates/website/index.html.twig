@@ -616,9 +616,9 @@
 		    <div class="row justify-content-center" id="je_minscris-form">
 		        <div class="col-xl-5 col-lg-6 col-md-7">
 		            <form name="formInscription" id="formInscription" method="POST" class="fos_user_registration_register d-flex flex-column" style="position:relative">
-		               <input class="form-control h-100" type="text" name="prenom" placeholder="Prénom" value="alex">
+		               <input class="form-control h-100" type="text" name="prenom" placeholder="Prénom">
 		               <input class="form-control h-100 my-3" type="text" value="0033548895" name="phone" placeholder="Numéro de téléphone" pattern="\d{10}|\+33\d{9}|\+33\s\d{1}\s\d{2}\s\d{2}\s\d{2}\s\d{2}|\d{2}\s\d{2}\s\d{2}\s\d{2}\s\d{2}">
-		               <input class="form-control h-100" type="email" name="email" placeholder="Adresse e-mail" value="alexngoumo.an@mail.com" pattern='^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$'>
+		               <input class="form-control h-100" type="email" name="email" placeholder="Adresse e-mail" pattern='^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$'>
 		               <div class="custom-control custom-checkbox mt-3 mb-3">
 		                  <input type="checkbox" class="custom-control-input" name="CGU" id="get-started-agree-2">
 		                  <label class="custom-control-label text-small" for="get-started-agree-2">J'accepte les conditions générales et la commission de 5% sur les gains généré grâce à EpodTrade.</label>
@@ -702,7 +702,7 @@
 	            processData:false,
 		        //data:$('#formTournoi').serialize(),
 		        success:function(response) {
-		        	toastr.success(response.responseJSON);
+		        	toastr.success("inscription réussite. Consulter vos mail afin de valider votre compte");
 			    	$('#formInscription button[type=submit]').button('reset');
 			    	$('#formInscription button[type=submit]').text("Je m'inscris !");
 			    	$('.lds-ripple').css('display','none');
