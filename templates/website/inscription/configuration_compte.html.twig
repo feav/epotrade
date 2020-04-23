@@ -1,0 +1,110 @@
+<div class="wiz-header">
+	<h2 class="title">CONFIGURATION DU COMPTE</h2>
+	<hr class="underline-title">
+</div>
+<div class="wiz-top-desc"></div>
+<form class="card card-body" name="configurationCompte" id="configurationCompte">
+	<div class="form-content">
+		<div class="row-infos">
+			<div class="info-label">
+				Choisissez la plateforme de trading 
+			</div>
+			<div class="list-inner-elt img-list-container">
+				<input id="trade_4" type="radio" name="trading_plateform" value="MetaTrade 4">
+				<label class="item-elt label-form" for="trade_4">
+					<img src="{{asset('images/meta_4.png')}}">
+				</label>
+				<input id="trade_5" type="radio" name="trading_plateform" value="MetaTrade 5">
+				<label class="item-elt label-form" for="trade_5">
+					<img src="{{asset('images/meta_5.png')}}">
+				</label>
+			</div>
+		</div>
+		<hr class="separate-row-infos">
+
+		<div class="row-infos">
+			<div class="info-label">
+				Choisissez le type de compte 
+			</div>
+			<div class="list-inner-elt img-list-container">
+				<input id="account_1" type="radio" name="account_type" value="standard">
+				<label class="item-elt label-form" for="account_1">
+					<img src="{{asset('images/stardard_1.png')}}">
+				</label>
+				<input id="account_2" type="radio" name="account_type" value="raw">
+				<label class="item-elt label-form" for="account_2">
+					<img src="{{asset('images/raw_1.png')}}">
+				</label>
+				<input id="account_3" type="radio" name="account_type" value="swap-free-standard">
+				<label class="item-elt label-form" for="account_3">
+					<img src="{{asset('images/swap_2.png')}}">
+				</label>
+				<input id="account_4" type="radio" name="account_type" value="swap-free-raw">
+				<label class="item-elt label-form" for="account_4">
+					<img src="{{asset('images/swap_1.png')}}">
+				</label>
+			</div>
+		</div>
+		<hr class="separate-row-infos">
+		<div class="row-infos">
+			<div class="info-label">
+				Choisissez la devise du compte
+			</div>
+			<div class="list-inner-elt img-list-container devise">
+				<input id="usd" type="radio" name="devise" value="usd">
+				<label class="item-elt label-form" for="usd">
+					<img src="{{asset('images/usd.png')}}">
+					<span class="devise">$usd</span>
+				</label>
+				<input id="gbp" type="radio" name="devise" value="gbp">
+				<label class="item-elt label-form" for="gbp">
+					<img src="{{asset('images/gbp.png')}}">
+					<span class="devise">€gbp</span>
+				</label>
+				<input id="cad" type="radio" name="devise" value="cad">
+				<label class="item-elt label-form" for="cad">
+					<img src="{{asset('images/cad.png')}}">
+					<span class="devise">$cad</span>
+				</label>
+				<input id="aus" type="radio" name="devise" value="aus">
+				<label class="item-elt label-form" for="aus">
+					<img src="{{asset('images/aus.png')}}">
+					<span class="devise">$aus</span>
+				</label>
+				<input id="eur" type="radio" name="devise" value="eur">
+				<label class="item-elt label-form" for="eur">
+					<img src="{{asset('images/eur.png')}}">
+					<span class="devise">€eur</span>
+				</label>
+				<input id="sgd" type="radio" name="devise" value="sgd">
+				<label class="item-elt label-form" for="sgd">
+					<img src="{{asset('images/sgd.png')}}" style="border:1px solid #d91e43">
+					<span class="devise">$sgd</span>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="card card-body shadow CGU_container">
+		<div class="form-row">
+        	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
+                <div class="custom-control custom-checkbox mb-3 mb-md-0">
+                    <input type="checkbox" class="custom-control-input" name="cgu" id="cgu" required="">
+                    <label class="custom-control-label" for="cgu">En cochant cette case <a class="link" target="_blank" href="javascript:void()"><small style="color: red">veuillez accepter les conditions générales.</small></a>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div>
+			<p class="cgu_container-text">
+				1. I acknowledge I have read and understood the Risk Warning Notice which is provided online as part of this application. I understand that Key Information Documents are available to me on the Vantage International Group Limited (“Epo trading”) website.. <br>
+				2. I acknowledge that I have read, understood and accept the Epo trading Client Agreement provided online as part of this application.<br>
+				3. I understand that Epo trading will not provide me with any investment advice on transactions.<br>
+				4. I also confirm that I have read, understood and agree to be bound by Epo trading Best Execution Policy, Conflicts of Interest Policy and Privacy Policy.<br>
+				5. I understand that personal information submitted as part of this application will be used to verify my identity with a third-party authentication service.<br>
+				6. I confirm that the information provided by me and inserted in this form is correct and that I acknowledge that I shall be obliged to inform Epo trading immediately in case of any changes to this information.<br>
+				7. I confirm that I have acted in my own name as specified in this application and not on behalf of a third party in respect of all matters related to this client relationship. Accordingly, all funds to be deposited and traded in on the account with Epo trading are my own funds.<br>
+				8. I confirm that the intended deposit amount chosen by me takes into account my total financial circumstances and is considered by me to be responsible under such circumstances.I understand the inherent risks of trading FX and CFDs and that due to the risky nature of the product I may lose more than my deposit.
+			</p>
+		</div>
+	</div>
+</form>

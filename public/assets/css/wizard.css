@@ -1,5 +1,6 @@
 
 ul{list-style: none;}
+.no-click{pointer-events: none;}
 #solution-popup .solution-container{
     position: relative;
     text-align: center;
@@ -33,6 +34,8 @@ ul{list-style: none;}
     border-radius: 4px 4px 0 0;
     margin: 0 .1rem;
 }
+#solution-popup .list-elt-bar .item-elt-bar:first-child{margin-left: 0px}
+#solution-popup .list-elt-bar .item-elt-bar:last-child{margin-right: 0px}
 #solution-popup .list-elt-bar .item-elt-bar.completed {
     background: #018f6f;
     border:none;
@@ -54,8 +57,9 @@ ul{list-style: none;}
 
 #solution-popup .solution-container #line-progress{
     position: absolute;
-    background-image: linear-gradient(to right, #db7a3b, #dd7b3a 98%, #ffffff);
-    height: 2px;
+    background:#046c66;
+    bottom: -3px;
+    height: 3px;
     transition: linear all .5s;
 }
 #solution-popup .stape-nav .content-nav-btn{
@@ -66,10 +70,7 @@ ul{list-style: none;}
     margin: 0px auto 20px;
 }
 #solution-popup .stape-nav .content-nav-btn >*{
-    border-radius: 3px;
-    color: #fff;
-    font-weight: 600;
-    padding: 18px 62px;
+    padding: 10px 30px;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -78,14 +79,12 @@ ul{list-style: none;}
         padding: 18px 6%;
     }
 }
-#solution-popup .stape-nav .content-nav-btn .btn-prev, 
-#solution-popup .stape-nav .content-nav-btn .annuler{
+#solution-popup .stape-nav .content-nav-btn .btn-prev{
     background-image: linear-gradient(273deg, #616161, #616161);
+    border:none;
+    color: #fff;
 }
-#solution-popup .stape-nav .content-nav-btn .btn-next, 
-#solution-popup .stape-nav .content-nav-btn .valider{
-    background-image: linear-gradient(273deg, #037268, #009771)
-}
+
 #solution-popup .stape-item{display: none;}
 #solution-popup .stape-item.active{display: block;}
 .card{border: none;}
@@ -177,7 +176,7 @@ input[type=radio]:checked+label.label-form .devise{color: #fff!important;}
 .CGU_container{
     border-radius: 7px;
 }
-#cgu_2:checked+label > .link{display: none;}
+#configurationCompte #cgu:checked+label > .link{display: none;}
 #identiteForm{
     text-align: left;
 }

@@ -3,5 +3,5 @@ website_homepage:
     controller: App\Controller\HomepageController::index
 
 website_inscription:
-    path: /inscription
-    controller: App\Controller\HomepageController::inscription
+  resource: 'inscription.yaml'
+  prefix: /inscription

@@ -1,0 +1,20 @@
+
+inscription_home:
+   path: /
+   controller: App\Controller\InscriptionController::inscription
+
+save_infos_personnelle:
+   path: /save-infos-pers
+   controller: App\Controller\InscriptionController::saveInfoPersoXhr
+
+save_apropos_vous:
+   path: /save-apropos-vous
+   controller: App\Controller\InscriptionController::saveAproposVousXhr
+
+save_configuration_compte:
+   path: /configuration-compte
+   controller: App\Controller\InscriptionController::configurationCompteXhr
+
+save_confirm_identite:
+   path: /confirmation-identite
+   controller: App\Controller\InscriptionController::confirmationIdentiteXhr

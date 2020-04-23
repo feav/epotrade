@@ -13,13 +13,6 @@ namespace PackageVersions;
 final class Versions
 {
     public const ROOT_PACKAGE_NAME = '__root__';
-    /**
-     * Array of all available composer packages.
-     * Dont read this array from your calling code, but use the \PackageVersions\Versions::getVersion() method instead.
-     *
-     * @var array<string, string>
-     * @internal
-     */
     public const VERSIONS          = array (
   'doctrine/annotations' => '1.10.2@b9d758e831c70751155c698c2f7df4665314a1cb',
   'doctrine/cache' => '1.10.0@382e7f4db9a12dc6c19431743a2b096041bcdd62',
@@ -49,6 +42,7 @@ final class Versions
   'psr/link' => '1.0.0@eea8e8662d5cd3ae4517c9b864493f59fca95562',
   'psr/log' => '1.1.3@0f73288fd15629204f9d42b7055f72dacbe811fc',
   'sensio/framework-extra-bundle' => 'v5.5.4@d0585d4825a87a5030ca8cd34adb4a17e1066c17',
+  'swiftmailer/swiftmailer' => 'v6.2.3@149cfdf118b169f7840bbe3ef0d4bc795d1780c9',
   'symfony/asset' => 'v4.4.7@e3574559efcb51601022fa46fd88dd13a8febdc2',
   'symfony/cache' => 'v4.4.7@f777b570291aebe51081b9827e05f3a747665e87',
   'symfony/cache-contracts' => 'v1.1.7@af50d14ada9e4e82cfabfabdc502d144f89be0a1',
@@ -97,6 +91,7 @@ final class Versions
   'symfony/serializer-pack' => 'v1.0.3@9bbce72dcad0cca797b678d3bfb764cf923ab28a',
   'symfony/service-contracts' => 'v1.1.8@ffc7f5692092df31515df2a5ecf3b7302b3ddacf',
   'symfony/stopwatch' => 'v4.4.7@e0324d3560e4128270e3f08617480d9233d81cfc',
+  'symfony/swiftmailer-bundle' => 'v3.4.0@553d2474288349faed873da8ab7c1551a00d26ae',
   'symfony/translation' => 'v4.4.7@4e54d336f2eca5facad449d0b0118bb449375b76',
   'symfony/translation-contracts' => 'v1.1.7@364518c132c95642e530d9b2d217acbc2ccac3e6',
   'symfony/twig-bridge' => 'v4.4.7@bef4da6724c5a89bb3408d3bc785be7cd5b9efed',
@@ -112,6 +107,7 @@ final class Versions
   'webmozart/assert' => '1.8.0@ab2cb0b3b559010b75981b1bdce728da3ee90ad6',
   'zendframework/zend-code' => '3.4.1@268040548f92c2bfcba164421c1add2ba43abaaa',
   'zendframework/zend-eventmanager' => '3.2.1@a5e2583a211f73604691586b8406ff7296a946dd',
+  'friendsofsymfony/user-bundle' => 'v2.1.2@1049935edd24ec305cc6cfde1875372fa9600446',
   'nikic/php-parser' => 'v4.4.0@bd43ec7152eaaab3bd8c6d0aa95ceeb1df8ee120',
   'symfony/browser-kit' => 'v4.4.7@e4b0dc1b100bf75b5717c5b451397f230a618a42',
   'symfony/css-selector' => 'v4.4.7@afc26133a6fbdd4f8842e38893e0ee4685c7c94b',
@@ -121,15 +117,16 @@ final class Versions
   'symfony/maker-bundle' => 'v1.15.0@31396f2e61803f0e2debbb43ba5aa21acbc6e15a',
   'symfony/phpunit-bridge' => 'v5.0.7@0258b43a94972abf1ee99ce2221359f8ac2a17fd',
   'symfony/profiler-pack' => 'v1.0.4@99c4370632c2a59bb0444852f92140074ef02209',
+  'symfony/templating' => 'v4.4.7@d65ba8cd13339b692f709ea36625851de218c4dc',
   'symfony/test-pack' => 'v1.0.6@ff87e800a67d06c423389f77b8209bc9dc469def',
   'symfony/web-profiler-bundle' => 'v4.4.7@4c432f5c21c700270819daacf95323302fa8f004',
-  'paragonie/random_compat' => '2.*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  'symfony/polyfill-ctype' => '*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  'symfony/polyfill-iconv' => '*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  'symfony/polyfill-php71' => '*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  'symfony/polyfill-php70' => '*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  'symfony/polyfill-php56' => '*@9502bbd22ad675f1805904f59a17bea7f01b74d9',
-  '__root__' => 'dev-master@9502bbd22ad675f1805904f59a17bea7f01b74d9',
+  'paragonie/random_compat' => '2.*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  'symfony/polyfill-ctype' => '*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  'symfony/polyfill-iconv' => '*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  'symfony/polyfill-php71' => '*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  'symfony/polyfill-php70' => '*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  'symfony/polyfill-php56' => '*@3a6ac025a31b5b35be2731320638b69444edcd07',
+  '__root__' => 'dev-master@3a6ac025a31b5b35be2731320638b69444edcd07',
 );
 
     private function __construct()
@@ -138,8 +135,6 @@ final class Versions
 
     /**
      * @throws \OutOfBoundsException If a version cannot be located.
-     *
-     * @psalm-param key-of<self::VERSIONS> $packageName
      */
     public static function getVersion(string $packageName) : string
     {

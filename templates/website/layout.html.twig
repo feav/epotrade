@@ -7,6 +7,8 @@
 
 {% block stylesheets %}
   <!-- Begin loading animation -->
+  <!--Floating WhatsApp css-->
+  <link rel="stylesheet" href="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/floating-wpp.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
   <link href="{{ asset('assets/css/loaders/loader-pulse.css')}}" rel="stylesheet" type="text/css" media="all" />
@@ -14,11 +16,22 @@
   <link href="{{ asset('assets/css/theme.css')}}" rel="stylesheet" type="text/css" media="all" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap" rel="stylesheet">
   <style type="text/css">
-      #sfwdt22ddf7{display: none!important;}
       .navbar img.logo{width: 140px}
       .navbar img.logo.scrolled-logo {display: none;}
       .navbar.scrolled img.logo.default-logo {display: none;}
       .navbar.scrolled img.logo.scrolled-logo {display: block;}
+      .floating-wpp{
+        bottom: 20px;
+        z-index: 9999;
+      }
+      .floating-wpp .floating-wpp-button{
+        width: 55px!important;
+        height: 55px!important;
+      }
+      .floating-wpp .floating-wpp-popup.active{
+        bottom: 60px;
+      }
+      .floating-wpp:hover{bottom: 21px;}
   </style>
 {% endblock %}
 
@@ -373,6 +386,7 @@
    <a href="#top" class="btn btn-primary rounded-circle btn-back-to-top" data-smooth-scroll data-aos="fade-up" data-aos-offset="2000" data-aos-mirror="true" data-aos-once="false">
    <img src="{{ asset('assets/img/icons/interface/icon-arrow-up.svg')}}" alt="Icon" class="icon bg-white" data-inject-svg>
    </a>
+   <div id="WAButton"></div>
 {% endblock %}
 
 {% block javascripts %}
@@ -422,6 +436,26 @@
   <!-- Required theme scripts (Do not remove) -->
   <script type="text/javascript" src="{{ asset('assets/js/theme.js')}}"></script>
   <!-- Removes page load animation when window is finished loading -->
+
+  
+  <!--Floating WhatsApp javascript-->
+  <script type="text/javascript" src="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/floating-wpp.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('#WAButton').floatingWhatsApp({
+      phone: '656645659', //WhatsApp Business phone number International format-
+      //Get it with Toky at https://toky.co/en/features/whatsapp.
+      headerTitle: 'Discutez avec nous sur whatsapp', //Popup Title
+      popupMessage: 'Bonjour, Comment pouvons nous vous aider? :)', //Popup Message
+      showPopup: true, //Enables popup display
+      buttonImage: '<img src="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/whatsapp.svg" />', //Button Image
+      //headerColor: 'crimson', //Custom header color
+      //backgroundColor: 'crimson', //Custom background button color
+      position: "right"    
+    });
+
+});
+</script>
   <script type="text/javascript">
     window.addEventListener("load",function(){
       document.querySelector('body').classList.add('loaded');
@@ -430,17 +464,4 @@
       }
    });
   </script>
-
-<!-- Start of Async Callbell Code -->
-<script>
-  window.callbellSettings = {
-    token: "kTWnSY5X5pLGZoNMm5AHfmrD"
-  };
-</script>
-<script>
-  (function(){var w=window;var ic=w.callbell;if(typeof ic==="function"){ic('reattach_activator');ic('update',callbellSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Callbell=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://dash.callbell.eu/include/'+window.callbellSettings.token+'.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
-</script>
-<!-- End of Async Callbell Code -->
-
-
 {% endblock %}

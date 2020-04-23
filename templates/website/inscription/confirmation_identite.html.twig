@@ -1,0 +1,87 @@
+<div class="wiz-header">
+	<h2 class="title">CONFIRMEZ VOTRE IDENTIFIANT</h2>
+	<hr class="underline-title">
+</div>
+<div class="wiz-top-desc">
+	<p>
+		En tant que courtier forex réglementé, nous sommes tenus de vérifier votre identité. Veuillez télécharger l'un des documents suivants pour votre vérification de preuve d'identité et de preuve d'adresse. Vous pouvez également envoyer vos documents de vérification par e-mail à <a href="mailto:epdrading@epdrading.com">epdrading@epdrading.com</a>
+	</p>
+</div>
+<form id="identiteForm" name="identiteForm" class="" action="">
+	<div class="title-load-doc identite-wrapper">Preuve d'identité en<span class="alert-msg" style="font-style: italic;"> attente de téléchargement</span></div>
+	<div class="text-guide">Choisissez un type de document et téléchargez en conséquence</div>
+	<div class="piece-load-wrapper">
+		<div class="img-type_piece">
+			<img src="{{asset('images/thumb_profile.png')}}">
+			<ul class="type-piece">
+				<li class="piece-item">photo d'identité</li>
+				<li class="piece-item">Passeport</li>
+				<li class="piece-item">Permis de conduire</li>
+			</ul>
+		</div>
+		<div class="wrap-load-action">
+			<input type="file" name="identite" id="identite" class="input-identite" style="display: none;" onchange="readURL(this);">
+			<label for="identite" class="label-identite">
+				<div class="content-waiting">
+					<i class="fa fa-upload"></i><br>
+					<span style="display: block;line-height: 12px;">Télécharger</span>
+				</div>
+				<div class="content-loaded">
+					<i class="fa fa-file"></i>
+					<span style="display: block;line-height: 12px;"><span class="file-name-identite">doc... </span><i class="fa fa-check-circle"></i></span>
+				</div>
+			</label>	
+		</div>
+	</div>
+	<div class="text-important" style="color: #e40606">
+		IMPORTANT: Le nom sur le document DOIT clairement indiquer votre nom complet.
+	</div>
+	<hr class="underline-title" style="border-top: 1px solid rgb(221, 221, 222)">
+
+	<div class="title-load-doc residence-wrapper">Preuve de résidence en <span class="alert-msg" style="font-style: italic;">attente de téléchargement</span></div>
+	<div class="text-guide">Choisissez un type de document et téléchargez en conséquence</div>
+	<div class="piece-load-wrapper">
+		<div class="img-type_piece">
+			<img src="{{asset('images/thumb_doc.png')}}">
+			<ul class="type-piece">
+				<li class="piece-item">Facture d'utilité</li>
+				<li class="piece-item">Relevé bancaire</li>
+				<li class="piece-item">Certificat de résidence</li>
+			</ul>
+		</div>
+		<div class="wrap-load-action">
+			<input type="file" name="residence" id="residence" class="input-residence" style="display: none;" onchange="readURL(this);">
+			<label for="residence" class="label-identite">
+				<div class="content-waiting">
+					<i class="fa fa-upload"></i><br>
+					<span style="display: block;line-height: 12px;">Télécharger</span>
+				</div>
+				<div class="content-loaded">
+					<i class="fa fa-file"></i>
+					<span style="display: block;line-height: 12px;"><span class="file-name-residence">doc... </span><i class="fa fa-check-circle"></i></span>
+				</div>
+			</label>	
+		</div>
+	</div>
+	<div class="text-important" style="color: #e40606">
+		IMPORTANT: Le nom sur le document DOIT clairement indiquer votre nom complet.
+	</div>
+</form>
+<script type="text/javascript">
+	function readURL(input) {
+      	if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	          	/*console.log(e.target);*/
+	          	var str = input.files[0].name;
+  				var docName = str.substr(0, 4);
+  				var idElt = input.getAttribute('id');
+  				console.log(idElt);
+  				$('#identiteForm #'+idElt).next().addClass('loaded');
+  				$('#identiteForm .'+idElt+'-wrapper .alert-msg').addClass('loaded');
+  				$('#identiteForm .file-name-'+idElt).text(docName+'...');
+	        };
+	        reader.readAsDataURL(input.files[0]);
+      	}
+    }
+</script>
