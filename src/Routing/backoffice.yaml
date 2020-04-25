@@ -1,0 +1,12 @@
+list_abonne:
+   path: /
+   controller: App\Controller\AbonneController::listAbonne
+
+informations_abonne:
+   path: /informations-abonne/{id}
+   controller: App\Controller\AbonneController::infosAbonne
+
+update_info_create:
+   path: /update-info-create/{id}
+   controller: App\Controller\AbonneController::UpdateToCreate
+   

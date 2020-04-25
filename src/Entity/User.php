@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
+     * @ORM\OneToOne(targetEntity=Information::class, cascade={"persist"}, mappedBy="user")
+    */
+    protected $information;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -20,9 +25,20 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $role;
+
 
     public function getId(): ?int
     {
@@ -32,7 +48,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->roles = ['ROLE_ADMIN'];
+        $this->role = 0;
     }
 
     public function getPrenom(): ?string
@@ -46,4 +63,47 @@ class User extends BaseUser
 
         return $this;
     }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getInformation(): ?Information
+    {
+        return $this->information;
+    }
+
+    public function setInformation(?Information $information): self
+    {
+        $this->information = $information;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = null === $information ? null : $this;
+        if ($information->getUser() !== $newUser) {
+            $information->setUser($newUser);
+        }
+
+        return $this;
+    }
+
+    public function getRole(): ?int
+    {
+        return $this->role;
+    }
+
+    public function setRole(int $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
 }

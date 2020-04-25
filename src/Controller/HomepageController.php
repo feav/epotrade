@@ -14,8 +14,4 @@ class HomepageController extends AbstractController
     {
 		return $this->render('website/index.html.twig', []);
 	}
-	public function inscription(Request $request)
-    {
-		return $this->render('website/inscription.html.twig', []);
-	}
 }

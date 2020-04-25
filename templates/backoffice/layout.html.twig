@@ -1,0 +1,235 @@
+{% extends 'base.html.twig' %}
+{% block meta %}
+  	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+{% endblock %}
+
+{% block stylesheets %}
+    <!--<link rel="icon" type="image/x-icon" href="{{asset('assetsDash/assets/img/favicon.ico')}}"/>-->
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="{{asset('assetsDash/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="{{asset('assetsDash/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assetsDash/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{{asset('assetsDash/plugins/maps/vector/jvector/jquery-jvectormap-2.0.3.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assetsDash/plugins/charts/chartist/chartist.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('assetsDash/assets/css/default-dashboard/style.css')}}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="{{asset('assetsDash/plugins/table/datatable/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/custom_dt_zero_config.css')}}">
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+
+    <style type="text/css">
+    	.desktop-nav.header{padding: 0 10px}
+        .desktop-nav.header .navbar-nav .form-inline.search{padding: 0;margin: 0}
+        .desktop-nav.header .navbar-nav .form-inline.search input{font-size: 13px}
+        .desktop-nav.header .nav-logo a.sidebarCollapse i{font-size: 19px}
+        .nav-logo .fa-logo{font-size: 21px!important;}
+        .nav-logo .fa-logo{font-size: 20px;}
+        .nav-link.dropdown-toggle.user{padding: 4px 0}
+        .modernSidebar-nav.header, .profile-sidebar{top: 48px}
+        #content{margin-top: 35px}
+        #content > .container{padding-top: 0!important}
+        .desktop-nav.header .navbar-nav .form-inline.search::before{
+            content:"" ;
+        }
+        .nav-logo{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-logo .fa-logo{
+            font-size: 30px;
+            color: #fff;
+        }
+        .img-fluid.logo{
+        	max-height: 25px;
+    		margin: 8px 0;
+        }
+        #content > .container{
+        	padding: 0 15px;
+        	padding-top: 26px!important;
+        }
+        .table > thead > tr > th{color: green}
+
+
+	    .modernSidebar-nav.header nav#modernSidebar ul.menu-categories li.menu > a div i{
+	    	position: relative;
+	    }
+    	.modernSidebar-nav.header nav#modernSidebar ul.menu-categories li.menu > a.open div i:after{
+		    position: absolute;
+		    content: '';
+		    height: 12px;
+		    width: 12px;
+		    background-color: #db0000;
+		    border-radius: 50%;
+		    top: -3px;
+		    right: -3px;
+		    z-index: 1;
+		    border: 2px solid #e9ecef;
+		}
+    </style>
+{% endblock %}
+{% block class %}default-sidebar{% endblock %}
+
+{% block body %}
+    <div id="eq-loader">
+      <div class="eq-loader-div">
+          <div class="eq-loading dual-loader mx-auto mb-5"></div>
+      </div>
+    </div>
+
+    <!--  BEGIN NAVBAR  -->
+    <header class="desktop-nav header navbar fixed-top">
+        <div class="nav-logo mr-sm-5 ml-sm-4">
+            <a href="javascript:void(0);" class="nav-link sidebarCollapse d-inline-block mr-sm-5" data-placement="bottom">
+                <i class="flaticon-menu-line-3"></i>
+            </a>
+            <a href="index.html" class=""> <img src="https://imgur.com/td4rDwV.png" class="img-fluid logo" alt="logo"></a>
+        </div>
+        <ul class="navbar-nav flex-row mr-auto">
+            <li class="nav-item d-lg-block d-none">
+                <form class="form-inline form-inline search animated-search" role="search">
+                    <i class="flaticon-search-1"></i>
+                    <input type="text" class="form-control search-form-control" placeholder="Recherche...">
+                </form>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav flex-row ml-lg-auto">
+
+            <li class="nav-item dropdown user-profile-dropdown pl-4 pr-lg-0 pr-2 ml-lg-2 mr-lg-4  align-self-center">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle user">
+                    <div class="user-profile d-lg-block d-none">
+                        <img src="{{asset('images/user.jpeg')}}" alt="admin-profile" class="img-fluid">
+                    </div>
+                    <i class="flaticon-user-7 d-lg-none d-block"></i>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <!--  END NAVBAR  -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+        <div class="overlay"></div>
+        <div class="ps-overlay"></div>
+        <div class="search-overlay"></div>
+        
+        <!--  BEGIN MODERN  -->
+        <div class="modernSidebar-nav header navbar">
+            <div class="">
+                <nav id="modernSidebar">
+                    <ul class="menu-categories pl-0 m-0" id="topAccordion">
+                        <li class="menu">
+                            <a href="{{path('list_abonne')}}"  class="open">
+                                <div class="">
+                                    <i class="flaticon-user-group"></i>
+                                    <span>Abonnés</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--  END MODERN  -->
+        
+        <!--  BEGIN CONTENT PART  -->
+        <div id="content" class="main-content">
+            <div class="container">
+            	{% block body_dash %}
+            	    
+            	{% endblock %}
+            </div>
+        </div>
+        <!--  END CONTENT PART  -->
+
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!--  BEGIN FOOTER  -->
+    <footer class="footer-section theme-footer">
+
+        <div class="footer-section-1  sidebar-theme">
+            
+        </div>
+
+        <div class="footer-section-2 container-fluid">
+            <div class="row">
+                <div id="toggle-grid" class="col-xl-7 col-md-6 col-sm-6 col-12 text-sm-left text-center">
+                </div>
+                <div class="col-xl-5 col-md-6 col-sm-6 col-12">
+                    <ul class="list-inline mb-0 d-flex justify-content-sm-end justify-content-center mr-sm-3 ml-sm-0 mx-3">
+                        <li class="list-inline-item  mr-3">
+                            <p class="bottom-footer">&#xA9; 2020 <a target="_blank" href="javascript:void()">Epo trade</a></p>
+                        </li>
+                        <li class="list-inline-item align-self-center">
+                            <div class="scrollTop"><i class="flaticon-up-arrow-fill-1"></i></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--  END FOOTER  -->
+
+    <!--  BEGIN PROFILE SIDEBAR  -->
+    <aside class="profile-sidebar text-center">
+        <div class="profile-content profile-content-scroll">
+            <div class="usr-profile">
+                <img src="{{asset('images/user.jpeg')}}" alt="admin-profile" class="img-fluid" style="width:40px;">
+            </div>
+            <p class="user-name mt-4 mb-4">{{app.user.username}}</p>
+            <div class="user-links text-left">
+                <ul class="list-unstyled">
+                    <li><a href="{{path('fos_user_security_logout')}}"><i class="flaticon-power-off"></i> Deconnexion</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <!--  BEGIN PROFILE SIDEBAR  -->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="{{asset('assetsDash/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
+    <script src="{{asset('assetsDash/assets/js/loader.js')}}"></script>
+    <script src="{{asset('assetsDash/bootstrap/js/popper.min.js')}}"></script>
+    <script src="{{asset('assetsDash/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/blockui/jquery.blockUI.min.js')}}"></script>
+    <script src="{{asset('assetsDash/assets/js/app.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="{{asset('assetsDash/assets/js/custom.js')}}"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="{{asset('assetsDash/plugins/charts/chartist/chartist.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/maps/vector/jvector/jquery-jvectormap-2.0.3.min.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/maps/vector/jvector/worldmap_script/jquery-jvectormap-world-mill-en.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/calendar/pignose/moment.latest.min.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/calendar/pignose/pignose.calendar.js')}}"></script>
+    <script src="{{asset('assetsDash/plugins/progressbar/progressbar.min.js')}}"></script>
+    <script src="{{asset('assetsDash/assets/js/default-dashboard/default-custom.js')}}"></script>
+
+    <script src="{{asset('assetsDash/plugins/table/datatable/datatables.js')}}"></script>
+    <script>
+        $('#zero-config').DataTable({
+        	"lengthMenu": [ 50, 100, 150, 200 ],
+            "language": {
+            	"url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/French.json",
+            }
+        });
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+{% endblock %}

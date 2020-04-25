@@ -1,0 +1,211 @@
+{% extends 'backoffice/layout.html.twig' %}
+{% block title %} {{parent()}} | Liste des abonnés {% endblock %}
+{% block meta %}
+    <meta name="description" content="">
+{% endblock %}
+
+{% block stylesheets %}
+	{{parent()}}
+    <style type="text/css">
+        .infos-container {
+            max-width: 645px;
+            margin: auto;
+            border: 1px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 11px;
+        }
+        .groupe-info {
+            padding-bottom: 15px;
+        }
+        .groupe-info:not(:first-child){
+            padding-top: 14px;
+            border-top: 1px solid #e8e8e8;
+        }
+        .groupe-info .title-infos {
+            font-size: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .groupe-info .info-item{
+            display: flex;
+        }
+        .groupe-info .info-item > * {
+            width: 50%;
+            border: 1px solid #e8e8e8;
+            padding: 13px 18px;
+            display: flex;
+            align-items: center;
+        }
+        .groupe-info .info-item  > *:first-child{
+            width: 60%;
+            color: #555A64;
+            font-weight: 600;
+        }
+        .groupe-info .info-item  > *:last-child{width: 40%; justify-content: center;}
+        .img-responsive{
+            max-width: 100%;
+            margin: auto;
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block body_dash %}
+    <div class="row" id="cancel-row">
+        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-content widget-content-area">
+                    <h5 style="margin-bottom: 3rem;">
+                        Abonné: {{informations.user.username}}
+                    </h5>
+                    <div class="infos-container">
+                        <div class="groupe-info">
+                            <h2 class="title-infos">INFORMATIONS PERSONNELLES</h2>
+                            <div class="info-item">
+                                <div class="question">Prénom</div>
+                                <div class="reponse">{{informations.prenom}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Deuxieme nom</div>
+                                <div class="reponse">{{informations.getSecondName}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Nom de famille</div>
+                                <div class="reponse">{{informations.getNomFamille}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">E-mail</div>
+                                <div class="reponse">{{informations.email}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Téléphone</div>
+                                <div class="reponse">{{informations.telephone}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Date de naissance</div>
+                                <div class="reponse">{{informations.getDateNaiss|date('d-m-Y')}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Lieu de naissance</div>
+                                <div class="reponse">{{informations.getLieuNaiss}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Type d'identification</div>
+                                <div class="reponse">{{informations.getIdentificationType}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Numéro d'identité</div>
+                                <div class="reponse">{{informations.getNumeroIdentite}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Referé par quelqu'un</div>
+                                <div class="reponse">{{informations.getIsReferred ? 'OUI':'NON'}}</div>
+                            </div>
+                        </div>
+                        <div class="groupe-info">
+                            <h2 class="title-infos">INFORMATIONS PERSONNELLES</h2>
+                            <div class="info-item">
+                                <div class="question">Pays de residence</div>
+                                <div class="reponse">{{informations.getPaysResidence}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Adresse</div>
+                                <div class="reponse">{{informations.adresse}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Ville</div>
+                                <div class="reponse">{{informations.ville}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Code postal</div>
+                                <div class="reponse">{{informations.getCodePostale}}</div>
+                            </div>
+                        </div>
+                        <div class="groupe-info">
+                            <h2 class="title-infos">EMPLOI ET DÉTAILS FINANCIERS</h2>
+                            <div class="info-item">
+                                <div class="question">Statut d'emploi</div>
+                                <div class="reponse">{{informations.getStatusEmploi}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Revenu annuel estimé</div>
+                                <div class="reponse">{{informations.getRevenueAnnuel}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Économies et investissements estimés</div>
+                                <div class="reponse">{{informations.getEconomieInvestissement}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Dépôt prévu estimé</div>
+                                <div class="reponse">{{informations.getDepotEstime}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Source de fonds</div>
+                                <div class="reponse">{{informations.getSourceFond}}</div>
+                            </div>
+                        </div>
+                        <div class="groupe-info">
+                            <h2 class="title-infos">CONNAISSANCES ET EXPÉRIENCE COMMERCIALES</h2>
+                            <div class="info-item">
+                                <div class="question">Nombre de transactions par semaine</div>
+                                <div class="reponse">{{informations.getNbTransaction}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Quantité d'échange par semaine</div>
+                                <div class="reponse">{{informations.getQteEchangeSemaine}}</div>
+                            </div>
+                        </div>
+                        <div class="groupe-info">
+                            <h2 class="title-infos">CONFIGURATION DU COMPTE</h2>
+                            <div class="info-item">
+                                <div class="question">Plateforme de trading</div>
+                                <div class="reponse">{{informations.getTradingPlateforme}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Type de compte</div>
+                                <div class="reponse">{{informations.getTypeCompte}}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Devise du compte</div>
+                                <div class="reponse">{{informations.devise|upper}}</div>
+                            </div>
+                        </div>
+                        <div class="groupe-info">
+                            <h2 class="title-infos">CONFIRMEZ VOTRE IDENTIFIANT</h2>
+                            <div class="info-item">
+                                <div class="question">Preuve d'identité</div>
+                                <div class="reponse">
+                                    <a href="{{asset('documents/identite/'~informations.getIdentiteDoc)}}" download  style="text-align: center;font-weight: bold;">
+                                        <span class="flaticon-download" style="font-weight: bold;"></span><br>
+                                        <span>Télécharger</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="question">Preuve de résidence</div>
+                                <div class="reponse">
+                                    <a href="{{asset('documents/residence/'~informations.getResidenceDoc)}}" download style="text-align: center;font-weight: bold;">
+                                        <span class="flaticon-download" style="font-weight: bold;"></span><br>
+                                        <span>Télécharger</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if informations.getIsCreate %}
+                    {% else %}
+                        <div style="text-align: center;margin: 12px 0">
+                            <a class="btn btn-primary" href="{{path('update_info_create', {'id':informations.user.id})}}">marquer créer</a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endblock body_dash %}
+
+{% block javascripts %}
+	{{parent()}}
+{% endblock %}

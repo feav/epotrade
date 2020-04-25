@@ -35,6 +35,7 @@
     procedStape();
 
     gotoNext = function(){
+        $('#solution-popup .item-elt-bar').eq(currentstape-1).addClass('completed');
         var stapeNext = currentstape+1;
         if(stapeNext <= sizeItem){
             $('#line-progress').data('stape', stapeNext);
@@ -73,18 +74,15 @@
             console.log("fin de l'inscription");
             return false;
         }
-        if(validateStape(currentstape)){
-            $('.lds-ripple').css('display','inline-block');
-            setTimeout(function(){
-                $('.lds-ripple').css('display','none');
-                $('.item-elt-bar').eq(currentstape-1).addClass('completed');
-                changeStape('next');
-            },2000)
-        }
+        validateStape(currentstape);
     });
 
     validateStape = function(stape){
         if(stape == 1){
+            if($('.stape-nav .content-nav-btn .btn-next').hasClass('inscription-complete')){
+                gotoNext();
+                return true;
+            }
             function validate(){
                 try{
                     var validator = $('#infoPersonnelle').validate({
@@ -178,6 +176,11 @@
             } 
         }
         else if(stape == 2){
+            if($('.stape-nav .content-nav-btn .btn-next').hasClass('inscription-complete')){
+                gotoNext();
+                return true;
+            }
+
             if($('form[name=apropos_vous] input:radio[name="statut_emploi"]:checked').val() == undefined ){
                 toastr.error("Aucun choix fait pour le Statut d'emploi");
                 return false;
@@ -227,16 +230,20 @@
             } 
         }
         else if(stape == 3){
+            if($('.stape-nav .content-nav-btn .btn-next').hasClass('inscription-complete')){
+                gotoNext();
+                return true;
+            }
+
+            if($('.stape-nav .content-nav-btn .btn-next').hasClass('inscription-complete'))
+                return true;
+
             if($('form[name=configurationCompte] input:radio[name="trading_plateform"]:checked').val() == undefined ){
                 toastr.error("Choisissez la plateforme de trading");
                 return false;
             }
             else if($('form[name=configurationCompte] input:radio[name="account_type"]:checked').val() == undefined ){
                 toastr.error("Choisissez le type de compte");
-                return false;
-            }
-            else if($('form[name=configurationCompte] input:radio[name="devise"]:checked').val() == undefined ){
-                toastr.error("Choisissez la devise du compte");
                 return false;
             }
             else if($('form[name=configurationCompte] input:radio[name="devise"]:checked').val() == undefined ){
@@ -268,6 +275,10 @@
             } 
         }
         if(stape == 4){
+            if($('.stape-nav .content-nav-btn .btn-next').hasClass('inscription-complete')){
+                gotoNext();
+                return true;
+            }
             var identite = document.getElementsByClassName("input-identite")[0];
             var residence = document.getElementsByClassName("input-residence")[0];
             if (identite.files.length == 0){

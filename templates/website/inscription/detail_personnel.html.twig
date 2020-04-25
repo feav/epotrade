@@ -256,13 +256,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="planner-name">Prénom</label>
-          <input type="text" name="prenom" class="form-control" id="prenom">
+          <input type="text" name="prenom" class="form-control" id="prenom" value="{{informations is not null ? informations.prenom : user.prenom }}">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="planner-email">Deuxième nom</label>
-          <input type="text" name="second_name" class="form-control" id="second_name" placeholder="">
+          <input type="text" name="second_name" class="form-control" id="second_name" value="{{informations is not null ? informations.getSecondName }}" value="">
         </div>
       </div>
     </div>
@@ -270,7 +270,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="planner-email">Nom de famille</label>
-          <input type="text" name="nom_famille" class="form-control" id="nom_famille" placeholder="">
+          <input type="text" name="nom_famille" class="form-control" id="nom_famille" value="{{informations is not null ? informations.getNomFamille }}">
         </div>
       </div>
       <div class="col-sm-6">
@@ -290,7 +290,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="email" name="email" class="form-control" id="email" placeholder="">
+          <input type="email" name="email" class="form-control" value="{{informations is not null ? informations.email : user.email}}" id="email" placeholder="">
         </div>
       </div>
       <div class="col-sm-6">
@@ -316,7 +316,7 @@
                 <div class="elt-birth" style="flex: 2">
                 	<select name="mois_naiss" class="custom-select" id="mois_naiss">
                 		{% for m in mois %}
-                			<option value="{{m}}">{{m}}</option>
+                			<option value="{{m.number}}">{{m.val}}</option>
                 		{% endfor %}
                     </select>
                 </div>
@@ -358,7 +358,7 @@
     <div class="form-row">
     	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
             <div class="custom-control custom-checkbox mb-3 mb-md-0">
-                <input type="checkbox" class="custom-control-input" id="planner-agree">
+                <input type="checkbox" class="custom-control-input" id="planner-agree" name="referred">
                 <label class="custom-control-label" for="planner-agree"><small>Avez-vous été référé par quelqu'un ? (optionnel)</small>
                 </label>
             </div>

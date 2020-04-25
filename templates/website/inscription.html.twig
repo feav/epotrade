@@ -207,7 +207,7 @@
 {% endblock %}
 
 {% block body_web %}
-	{%  set mois = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'] %}
+	{%  set mois = [{'number':'01', 'val':'Janvier'}, {'number':'02', 'val':'Fevrier'}, {'number':'03', 'val':'Mars'}, {'number':'04', 'val':'Avril'}, {'number':'05', 'val':'Mai'}, {'number':'06', 'val':'Juin'}, {'number':'07', 'val':'Juillet'}, {'number':'08', 'val':'Aout'}, {'number':'09', 'val':'Septembre'}, {'number':'10', 'val':'Octobre'}, {'number':'11', 'val':'Novembre'}, {'number':'12', 'val':'Decembre'}] %}
 	<div class="bg-gradient p-0 o-hidden" data-overlay>
       <section class="pb-0" style="padding-top:3.5rem">
         <div class="container">
@@ -219,7 +219,16 @@
               </div>
             </div>
           </div>
+          
 		<div id="solution-popup">
+			{% for message in app.flashes('msg_to_valide_account') %}
+	          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+				  {{ message }}
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+			  </div>
+	       {% endfor %}
 			<div class="solution-container shadow" >
 				<div class="progress-container" style="position: relative;">
 					<div id="line-progress" data-stape="1"></div>
@@ -253,16 +262,16 @@
                     </div>
 					<div class="solution-stape-list" style="padding: 0 10px;">
 						<div class="stape-item active animated fadeIn">
-							{{ include("website/inscription/detail_personnel.html.twig", { datas: [] }) }}
+							{{ include("website/inscription/detail_personnel.html.twig") }}
 						</div>
 						<div class="stape-item animated fadeIn">
-							{{ include("website/inscription/apropos_de_moi.html.twig", { datas: [] }) }}
+							{{ include("website/inscription/apropos_de_moi.html.twig") }}
 						</div>
 						<div class="stape-item animated fadeIn">
-							{{ include("website/inscription/configuration_compte.html.twig", { datas: [] }) }}
+							{{ include("website/inscription/configuration_compte.html.twig") }}
 						</div>
 						<div class="stape-item animated fadeIn">
-							{{ include("website/inscription/confirmation_identite.html.twig", { datas: [] }) }}
+							{{ include("website/inscription/confirmation_identite.html.twig") }}
 						</div>
 						<div class="stape-item animated fadeIn">
 							<p style="font-size: 19px;">
@@ -275,7 +284,7 @@
 				<div class="stape-nav">
 				 <div class="content-nav-btn">
 				     <span class="btn-prev btn">PRECEDENT</span>
-				     <span class="btn-next btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3">SUIVANT</span>
+				     <span class="btn-next btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3 inscription-complete {% if (informations is not null) and (informations.getIsCreate) %} inscription-complete {% endif %} ">SUIVANT</span>
 				 </div>
 				</div>
 			</div>

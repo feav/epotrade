@@ -1,0 +1,89 @@
+{% extends 'backoffice/layout.html.twig' %}
+{% block title %} {{parent()}} | Liste des abonnés {% endblock %}
+{% block meta %}
+    <meta name="description" content="">
+{% endblock %}
+
+{% block stylesheets %}
+	{{parent()}}
+{% endblock %}
+
+{% block body_dash %}
+    <div class="row" id="cancel-row">
+    
+        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-header">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            <h4>Zero Configuration</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="table-responsive mb-4">
+                        <table id="zero-config" class="table table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Prenom</th>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Telephone</th>
+                                    <th>Pays residence</th>
+                                    <th>Depot estime</th>
+                                    <th>Devise</th>
+                                    <th>Etat</th>
+                                    <th class="invisible"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	{% for user in users %}
+                            		<tr>
+	                                    <td>{{user.id}}</td>
+	                                    <td>{{user.information.prenom}}</td>
+	                                    <td>{{user.information.getNomFamille}}</td>
+	                                    <td>{{user.information.email}}</td>
+	                                    <td>{{user.information.telephone}}</td>
+	                                    <td>{{user.information.getPaysResidence}}</td>
+	                                    <td>{{user.information.getDepotEstime}}</td>
+	                                    <td>{{user.information.devise}}</td>
+	                                    <td>
+	                                    	{% if user.information.getIsCreate %}
+	                                    		Abonné crée
+						                    {% else %}
+						                        {{user.information.getIsComplete ? 'Complet':'pas complet'}}
+						                    {% endif %}
+		                                </td>
+	                                    <td>
+	                                    	<a href="{{path('informations_abonne', {'id':user.id})}}" style="text-decoration: underline;">Voir</a>
+	                                    </td>
+	                                </tr>
+                            	{% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Prenom</th>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Telephone</th>
+                                    <th>Pays residence</th>
+                                    <th>Depot estime</th>
+                                    <th>Devise</th>
+                                    <th>Etat</th>
+                                    <th class="invisible"></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock body_dash %}
+
+{% block javascripts %}
+	{{parent()}}
+{% endblock %}

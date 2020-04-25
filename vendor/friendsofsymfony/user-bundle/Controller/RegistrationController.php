@@ -28,6 +28,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+
 /**
  * Controller managing the registration.
  *
@@ -99,6 +102,7 @@ class RegistrationController extends Controller
             $error = "";
             if ('POST' === $request->getMethod()) {
                 $prenom = $request->request->get('prenom');
+                $telephone = $request->request->get('phone');
                 $email = $request->request->get('email');
                 $existEmail = $this->userManager->findUserByEmail($email);
                 if(!is_null($existEmail)){
@@ -111,17 +115,18 @@ class RegistrationController extends Controller
                     $user->setEmailCanonical($email);
                     $user->setPlainPassword("mot_de_passe");
                     $user->setPrenom($prenom);
+                    $user->setTelephone($telephone);
                     $user->setLastLogin(new \DateTime());
                     $username = $this->generateUsername($user);
                     $user->setUsername($username);
                     $user->setUsernameCanonical($username);
-                    /*$user->addRole('ROLE_SUPER_ADMIN');*/
+                    $user->setEnabled(1);
 
                     $event = new FormEvent($form, $request);
                     $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
                     $this->userManager->updateUser($user);
-                    $em->persist($user);
-                    $em->flush();
+                    /*$em->persist($user);
+                    $em->flush();*/
 
                     if (null === $response = $event->getResponse()) {
                         $url = $this->generateUrl('fos_user_registration_confirmed');
@@ -130,12 +135,35 @@ class RegistrationController extends Controller
 
                     $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
                     //return $response;    
-                    $response = new Response(json_encode("inscription reussite"), 200);                            
+                    $response = new Response(json_encode("inscription reussite"), 200);
+                    $this->authentification($request, $user);
+                    $this->addFlash("msg_to_valide_account", "N'oubliez pas valider votre compte en cliquant sur le lien qui vous a été par mail");
                 }
             }
+            
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
+    }
+
+    public function authentification(Request $request, $user){
+        // The third parameter "main" can change according to the name of your firewall in security.yml
+        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+        $this->get('security.token_storage')->setToken($token);
+
+        // If the firewall name is not main, then the set value would be instead:
+        // $this->get('session')->set('_security_XXXFIREWALLNAMEXXX', serialize($token));
+        $this->get('session')->set('_security_main', serialize($token));
+        
+        // Fire the login event manually
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+        
+        /*$refererUrl = $request->getSession()->get('_security.main.target_path');
+        if ($refererUrl)
+            return new RedirectResponse($refererUrl);
+        return $this->redirectToRoute('dashboard');*/
+        return 1;
     }
 
     public function registerAction(Request $request)
