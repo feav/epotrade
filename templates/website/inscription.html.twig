@@ -10,6 +10,10 @@
 	{{parent()}}
     <link href="{{ asset('assets/css/wizard.css')}}" rel="stylesheet" type="text/css" media="all" />
     <style type="text/css">
+    	.alert-warning.alert-inscription {
+		    max-width: 900px;
+		    margin: auto;
+		}
     	.lds-ripple {
 	        display: none;
 	        width: 80px;
@@ -222,7 +226,7 @@
           
 		<div id="solution-popup">
 			{% for message in app.flashes('msg_to_valide_account') %}
-	          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+	          <div class="alert alert-warning alert-dismissible fade show alert-inscription" role="alert">
 				  {{ message }}
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				    <span aria-hidden="true">&times;</span>
