@@ -262,7 +262,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="planner-email">Deuxième nom</label>
-          <input type="text" name="second_name" class="form-control" id="second_name" value="{{informations is not null ? informations.getSecondName }}" value="">
+          <input type="text" name="second_name" class="form-control" id="second_name" value="{{informations is not null ? informations.getSecondName }}">
         </div>
       </div>
     </div>
@@ -279,7 +279,7 @@
           <div class="position-relative">
             <select name="nationalite" class="custom-select" id="nationalite">
               {% for c in countries %}
-                <option value="{{c.code}}-{{c.name}}">{{c.name}}</option>
+                <option value="{{c.code}}-{{c.name}}" {% if (informations is not null) and (informations.nationalite == c.code~'-'~c.name) %} selected="selected" {% endif %}>{{c.name}}</option>
               {% endfor %}
             </select>
           </div>
@@ -296,7 +296,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="telephone">Numéro de téléphone</label>
-          <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Ex:0033548895">
+          <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Ex:0033548895" value="{{informations is not null ? informations.telephone : user.telephone}}">
         </div>
       </div>
     </div>
@@ -334,7 +334,7 @@
         <div class="col-sm-6">
             <div class="form-group">
               <label for="lieu_naiss">Lieu de naissance</label>
-              <input type="text" name="lieu_naiss" class="form-control" id="lieu_naiss" placeholder="">
+              <input type="text" name="lieu_naiss" class="form-control" id="lieu_naiss" placeholder="" value="{{informations is not null ? informations.getLieuNaiss}}">
             </div>
         </div>
     </div>
@@ -343,15 +343,15 @@
         <div class="form-group">
           <label for="ident_type">Type d'identification</label>
           <select name="ident_type" class="custom-select" id="ident_type">
-              <option value="cni">Carte Nationale ID</option>
-              <option value="passport">Passport</option>
+              <option value="cni" {% if (informations is not null) and (informations.getIdentificationType == 'cni') %} selected="selected" {% endif %}>Carte Nationale ID</option>
+              <option value="passport" {% if (informations is not null) and (informations.getIdentificationType == 'passport') %} selected="selected" {% endif %}>Passport</option>
           </select>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="planner-email">Numéro d'identité avec photo</label>
-          <input type="text" name="ident_number" class="form-control" id="ident_number" placeholder="">
+          <label for="planner-email">Numéro d'identité</label>
+          <input type="text" name="ident_number" class="form-control" id="ident_number" value="{{informations is not null ? informations.getNumeroIdentite}}">
         </div>
       </div>
     </div>
@@ -386,13 +386,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="adresse">Adresse</label>
-          <input type="text" name="adresse" class="form-control" id="adresse" placeholder="">
+          <input type="text" name="adresse" class="form-control" id="adresse" value="{{informations is not null ? informations.adresse}}">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="province">Province / Etat</label>
-          <input type="text" name="province" class="form-control" id="province" placeholder="">
+          <input type="text" name="province" class="form-control" id="province" value="{{informations is not null ? informations.etat}}">
         </div>
       </div>
     </div>
@@ -400,13 +400,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="ville">Ville</label>
-          <input type="text" name="ville" class="form-control" id="ville" placeholder="">
+          <input type="text" name="ville" class="form-control" id="ville" value="{{informations is not null ? informations.ville}}">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="codepostal">Code postal</label>
-          <input type="text" name="codepostal" class="form-control" id="codepostal" placeholder="">
+          <input type="text" name="codepostal" class="form-control" id="codepostal" value="{{informations is not null ? informations.getCodePostale}}">
         </div>
       </div>
     </div>
