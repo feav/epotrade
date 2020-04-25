@@ -120,7 +120,7 @@ class RegistrationController extends Controller
                     $username = $this->generateUsername($user);
                     $user->setUsername($username);
                     $user->setUsernameCanonical($username);
-                    $user->setEnabled(1);
+                    $user->setEnabled(true);
 
                     $event = new FormEvent($form, $request);
                     $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);

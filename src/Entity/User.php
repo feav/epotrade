@@ -50,6 +50,7 @@ class User extends BaseUser
         parent::__construct();
         //$this->roles = ['ROLE_ADMIN'];
         $this->role = 1;
+        $this->enabled = true;
     }
 
     public function getPrenom(): ?string
