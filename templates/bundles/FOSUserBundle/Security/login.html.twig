@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% extends 'website/layout.html.twig' %}
-{% block title %} {{parent()}} | Accueil {% endblock %}
+{% block title %} {{parent()}} | Coonexion {% endblock %}
 {% block meta %}
     <meta name="description" content="">
 {% endblock %}
@@ -65,13 +65,13 @@
               <div class="mb-5">
                 <div class="mb-2 mb-md-4" data-aos="fade-left" data-aos-delay="100">
                   <div class="media rounded align-items-center pl-3 pr-3 pr-md-4 py-2 bg-white shadow-sm">
-                    <img src="assets/img/avatars/male-4.jpg" alt="Harvey Derwent avatar image" class="avatar avatar-sm flex-shrink-0 mr-3">
+                    <img src="{{ asset('assets/img/avatars/male-4')}}" alt="Harvey Derwent avatar image" class="avatar avatar-sm flex-shrink-0 mr-3">
                     <div class="text-dark mb-0">&ldquo;We are working at almost twice the capacity&rdquo;</div>
                   </div>
                 </div>
                 <div class="mb-2 mb-md-4" data-aos="fade-left" data-aos-delay="200">
                   <div class="media rounded align-items-center pl-3 pr-3 pr-md-4 py-2 bg-white shadow-sm">
-                    <img src="assets/img/avatars/male-1.jpg" alt="Harvey Derwent avatar image" class="avatar avatar-sm flex-shrink-0 mr-3">
+                    <img src="{{ asset('assets/img/avatars/male-1')}}" alt="Harvey Derwent avatar image" class="avatar avatar-sm flex-shrink-0 mr-3">
                     <div class="text-dark mb-0">&ldquo;Jumpstart increases productivity.&rdquo;</div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="mb-3" data-aos="fade-left" data-aos-delay="300">
                   <div class="d-flex align-items-center">
                     <div class="rounded-circle bg-success-alt">
-                      <img src="assets/img/icons/interface/icon-check.svg" alt="Binoculars icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
+                      <img src="{{ asset('assets/img/icons/interface/icon-check.svg')}}" alt="Binoculars icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
                     </div>
                     <h6 class="mb-0 ml-3">Fully Responsive</h6>
                   </div>
@@ -89,7 +89,7 @@
                 <div class="mb-3" data-aos="fade-left" data-aos-delay="400">
                   <div class="d-flex align-items-center">
                     <div class="rounded-circle bg-success-alt">
-                      <img src="assets/img/icons/interface/icon-check.svg" alt="Layouts icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
+                      <img src="{{ asset('assets/img/icons/interface/icon-check.svg')}}" alt="Layouts icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
                     </div>
                     <h6 class="mb-0 ml-3">Multiple Layouts</h6>
                   </div>
@@ -97,7 +97,7 @@
                 <div class="mb-3" data-aos="fade-left" data-aos-delay="500">
                   <div class="d-flex align-items-center">
                     <div class="rounded-circle bg-success-alt">
-                      <img src="assets/img/icons/interface/icon-check.svg" alt="Box icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
+                      <img src="{{ asset('assets/img/icons/interface/icon-check.svg')}}" alt="Box icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
                     </div>
                     <h6 class="mb-0 ml-3">Modular Components</h6>
                   </div>
@@ -105,7 +105,7 @@
                 <div class="mb-3" data-aos="fade-left" data-aos-delay="600">
                   <div class="d-flex align-items-center">
                     <div class="rounded-circle bg-success-alt">
-                      <img src="assets/img/icons/interface/icon-check.svg" alt="Lightning icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
+                      <img src="{{ asset('assets/img/icons/interface/icon-check.svg')}}" alt="Lightning icon" class="m-2 icon icon-xs bg-success" data-inject-svg>
                     </div>
                     <h6 class="mb-0 ml-3">Suits Your Style</h6>
                   </div>
