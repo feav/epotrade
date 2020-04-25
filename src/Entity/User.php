@@ -48,8 +48,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->roles = ['ROLE_ADMIN'];
-        $this->role = 0;
+        //$this->roles = ['ROLE_ADMIN'];
+        $this->role = 1;
     }
 
     public function getPrenom(): ?string
