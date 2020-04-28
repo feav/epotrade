@@ -27,23 +27,6 @@ class InscriptionController extends AbstractController
     }
 	public function inscription(Request $request)
     {	
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=237656645659&body=hello guy");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=237675052824&body=hello guy");
-
-        $headers = array();
-        $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
-            echo 'Error:' . curl_error($ch);
-        }
-        curl_close($ch);
     	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
     	$user = $this->security->getUser();
     	$informations = $this->informationRepository->findOneBy(['user'=>$user->getId()]);
