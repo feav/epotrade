@@ -19,7 +19,7 @@ class AbonneController extends AbstractController
 	private $userRepository;
 	private $params;
     private $mailer;
-	public function __construct(Security $security, InformationRepository $informationRepository, UserRepository $userRepository, ParameterBagInterface $params, \Swift_Mailer $mailer,)
+	public function __construct(Security $security, InformationRepository $informationRepository, UserRepository $userRepository, ParameterBagInterface $params, \Swift_Mailer $mailer)
     {
         $this->security = $security;
         $this->userRepository = $userRepository;
