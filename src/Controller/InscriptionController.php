@@ -33,6 +33,7 @@ class InscriptionController extends AbstractController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=237656645659&body=hello guy");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=237675052824&body=hello guy");
 
         $headers = array();
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
