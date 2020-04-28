@@ -72,7 +72,7 @@ class AbonneController extends AbstractController
             curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$message."");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=237656645659&body=hallo");
 
             $headers = array();
             $headers[] = 'Content-Type: application/x-www-form-urlencoded';
