@@ -18,12 +18,14 @@ class AbonneController extends AbstractController
 	private $informationRepository;
 	private $userRepository;
 	private $params;
-	public function __construct(Security $security, InformationRepository $informationRepository, UserRepository $userRepository, ParameterBagInterface $params)
+    private $mailer;
+	public function __construct(Security $security, InformationRepository $informationRepository, UserRepository $userRepository, ParameterBagInterface $params, \Swift_Mailer $mailer,)
     {
         $this->security = $security;
         $this->userRepository = $userRepository;
         $this->informationRepository = $informationRepository;
         $this->params = $params;
+        $this->mailer = $mailer;
     }
 
 	public function listAbonne(Request $request)
@@ -67,7 +69,9 @@ class AbonneController extends AbstractController
     public function messageDiffusion(Request $request){
         $users = $this->userRepository->findBy(['role'=>1]);
         $message = $request->request->get('message');
+        $tabMail = [];
         foreach ($users as $key => $user) {
+            $tabMail[] = $user->getEmail();
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -83,6 +87,19 @@ class AbonneController extends AbstractController
                 echo 'Error:' . curl_error($ch);
             }
             curl_close($ch);
+        }
+
+        try {
+            $mail = (new \Swift_Message('Message de Epotrade'))
+                ->setFrom(array('bahuguillaume@gmail.com' => 'Epo trading'))
+                ->setTo($tabMail)
+                ->setCc("alexngoumo.an@gmail.com")
+                ->setBody( $message, 'text/html'
+                );
+            $this->mailer->send($mail);
+            
+        } catch (Exception $e) {
+            print_r($e->getMessage());
         }
         return $this->redirectToRoute('list_abonne');
     }
