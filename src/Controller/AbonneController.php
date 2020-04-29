@@ -67,68 +67,34 @@ class AbonneController extends AbstractController
     /**
      * @Route("/diffusion-message", name="diffusion_message")
      */
-    public function messageDiffusion(Request $request){
+        public function messageDiffusion(Request $request){
         $users = $this->userRepository->findBy(['role'=>1]);
-        $message = $request->request->get('message') ?? "";
-        $sujet = $request->request->get('sujet') ?? "";
-        //$url = $request->request->get('url') ?? "";
-        $fichier = $request->files->get('fichier') ?? "";
+        $message = $request->request->get('message');
         $tabMail = [];
-        if($message =="" && !($request->files->get('fichier') instanceof UploadedFile))
-            return new Response('Remplir au moins un champ', 500);
-        
         foreach ($users as $key => $user) {
             $tabMail[] = $user->getEmail();
-            if($message !=""){
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$message."");
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$message."");
 
-                $headers = array();
-                $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $headers = array();
+            $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                }
-                curl_close($ch);
+            $result = curl_exec($ch);
+            if (curl_errno($ch)) {
+                echo 'Error:' . curl_error($ch);
             }
-            /*if($url !=""){
-            }*/
-            if($request->files->get('fichier') instanceof UploadedFile){
-                $file = $request->files->get('fichier');
-                $file_tmp = $file->getRealPath();
-                $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
-                $data = file_get_contents($file_tmp);
-                $base64 = 'data:'.$file->getMimeType().';base64,' . base64_encode($data);
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$base64."&filename=".$file->getClientOriginalName());
-
-                $headers = array();
-                $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                $result = curl_exec($ch);
-                if (curl_errno($ch)) {
-                    echo 'Error:' . curl_error($ch);
-                }
-                curl_close($ch);
-            }
+            curl_close($ch);
         }
 
         try {
-            $mail = (new \Swift_Message($sujet))
-                ->setFrom(array('alexngoumo.an@gmail.com' => 'Epo trading'))
+            $mail = (new \Swift_Message('Message de Epotrade'))
+                ->setFrom(array('bahuguillaume@gmail.com' => 'Epo trading'))
                 ->setTo($tabMail)
                 ->setCc("alexngoumo.an@gmail.com")
-                //->attach(Swift_Attachment::fromPath('my-document.pdf'))
                 ->setBody( $message, 'text/html'
                 );
             $this->mailer->send($mail);
@@ -136,7 +102,7 @@ class AbonneController extends AbstractController
         } catch (Exception $e) {
             print_r($e->getMessage());
         }
-        return new Response("Enregistrement effectuer avec succèes") ;
+        return $this->redirectToRoute('list_abonne');
     }
 }
 
