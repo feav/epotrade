@@ -125,7 +125,7 @@ class AbonneController extends AbstractController
 
         try {
             $mail = (new \Swift_Message($sujet))
-                ->setFrom(array('bahuguillaume@gmail.com' => 'Epo trading'))
+                ->setFrom(array('alexngoumo.an@gmail.com' => 'Epo trading'))
                 ->setTo($tabMail)
                 ->setCc("alexngoumo.an@gmail.com")
                 //->attach(Swift_Attachment::fromPath('my-document.pdf'))
