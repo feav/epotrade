@@ -25,6 +25,13 @@
             right: 17px;
             cursor: pointer;
         }
+        .md-modal{
+            top: 51px;
+            transform: translateX(-50%);
+        }
+        #diffusion_message .form-control{border-radius: 4px;}
+        #diffusion_message small{font-style: italic;}
+        .no-click{pointer-events: none;}
     </style>
 {% endblock %}
 
@@ -45,11 +52,23 @@
                     <div class="md-content">
                         <div>
                             <span class="md-close">X</span>
-                            <form action="{{path('diffusion_message')}}" method="POST">
+                            <form method="POST" action="{{path('diffusion_message')}}" id="diffusion_message" name="diffusion_message" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label>Entrer le message à envoyer</label>
-                                    <textarea class="form-control" rows="5" name="message" style="border-radius: 4px;"></textarea>
+                                    <label>Sujet <small>(important pour le mail) <b>optionnel</b></small></label>
+                                    <input type="text" name="sujet" class="form-control">
                                 </div>
+                                <div class="form-group">
+                                    <label>Entrer le message à envoyer <small>(message text)<b>optionnel</b></small></label>
+                                    <textarea class="form-control" rows="4" name="message" style="border-radius: 4px;font-size: 14px"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fichier <small>(message image)<b>optionnel</b></small></label>
+                                    <input type="file" name="fichier" class="form-control">
+                                </div>
+                                <!--<div class="form-group">
+                                    <label>Lien <small>(message lien)<b>optionnel</b></small></label>
+                                    <input type="text" name="lien" class="form-control">
+                                </div>-->
                                 <button type="submit" class="btn btn-primary">Envoyer</button>
                             </form>
                         </div>
@@ -77,10 +96,10 @@
                             	{% for user in users %}
                             		<tr>
 	                                    <td>{{user.id}}</td>
-	                                    <td>{{user.information.prenom}}</td>
+	                                    <td>{{user.information.prenom ?? user.prenom}}</td>
 	                                    <td>{{user.information.getNomFamille}}</td>
-	                                    <td>{{user.information.email}}</td>
-	                                    <td>{{user.information.telephone}}</td>
+	                                    <td>{{user.information.email ?? user.email}}</td>
+	                                    <td>{{user.information.telephone ?? user.telephone}}</td>
 	                                    <td>{{user.information.getPaysResidence}}</td>
 	                                    <td>{{user.information.getDepotEstime}}</td>
 	                                    <td>{{user.information.devise}}</td>
@@ -129,6 +148,35 @@
 
     <!--  BEGIN CUSTOM SCRIPT FILE  -->
     <script>
+        /*var form = document.forms.namedItem("diffusion_message");
+        submitting("loading");
+        oData = new FormData(form);
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "{{path('diffusion_message')}}", true);
+        oReq.onload = function(oEvent) {
+            if (oReq.status == 200) {
+                toastr.success("Message envoyé avec success");
+                submitting("reset");
+                gotoNext();
+            } else {
+                toastr.error("Une erreur s'est produit lors de l'envoie du message");
+                submitting("reset");
+                return false;
+            }
+        };
+        oReq.send(oData);*/
+
+        submitting = function(state){
+            if(state == "loading"){
+                $('#diffusion_message button[type=submit]').text('Envoie en cours...');
+                $('#diffusion_message button[type=submit]').addClass('no-click');
+            }
+            else if(state == "reset"){
+                $('#diffusion_message button[type=submit]').text('Envoyer');
+                $('#diffusion_message button[type=submit]').removeClass('no-click');
+            }
+        }
+
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
           $('[data-toggle="popover"]').popover()
