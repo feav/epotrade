@@ -72,7 +72,7 @@ class AbonneController extends AbstractController
         $message = $request->request->get('message') ?? "";
         $sujet = $request->request->get('sujet') ?? "";
         //$url = $request->request->get('url') ?? "";
-        $fichier = $request->files->get('fichier') ?? "";
+        $fichier = $request->files->get('fichier');
         $tabMail = [];
         if($message ="" && !($request->files->get('fichier') instanceof UploadedFile))
             return new Response('Remplir au moins un champ', 500);
@@ -84,7 +84,7 @@ class AbonneController extends AbstractController
                 curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=*".strtoupper($sujet)."* ".$message."");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$message."");
 
                 $headers = array();
                 $headers[] = 'Content-Type: application/x-www-form-urlencoded';
@@ -98,7 +98,7 @@ class AbonneController extends AbstractController
             }
             /*if($url !=""){
             }*/
-            if($request->files->get('fichier') instanceof UploadedFile){
+            /*if($request->files->get('fichier') instanceof UploadedFile){
                 $file = $request->files->get('fichier');
                 $file_tmp = $file->getRealPath();
                 $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
@@ -120,7 +120,7 @@ class AbonneController extends AbstractController
                     echo 'Error:' . curl_error($ch);
                 }
                 curl_close($ch);
-            }
+            }*/
         }
 
         try {
