@@ -136,7 +136,8 @@ class AbonneController extends AbstractController
         } catch (Exception $e) {
             print_r($e->getMessage());
         }
-        return new Response("Enregistrement effectuer avec succèes") ;
+        //return new Response("Enregistrement effectuer avec succèes") ;
+        return $this->redirectToRoute('list_abonne');
     }
 }
 
