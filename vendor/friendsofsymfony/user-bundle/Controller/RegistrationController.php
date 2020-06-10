@@ -98,16 +98,16 @@ class RegistrationController extends Controller
 
         $form->handleRequest($request);
 
-        if($request->isXmlHttpRequest()) {
+        //if($request->isXmlHttpRequest()) {
             $error = "";
             if ('POST' === $request->getMethod()) {
                 $prenom = $request->request->get('prenom');
-                $telephone = $request->request->get('phone');
+                $telephone = $request->request->get('telephone');
                 $email = $request->request->get('email');
                 $existEmail = $this->userManager->findUserByEmail($email);
                 if(!is_null($existEmail)){
                     $error = '';
-                    $error = "Un utilisateur existe déjà avec cet email. ";
+                    $error = "Un utilisateur existe deja avec cet email. ";
                     $response = new Response(json_encode($error), 500);
                 }
                 else{
@@ -143,7 +143,7 @@ class RegistrationController extends Controller
             
             $response->headers->set('Content-Type', 'application/json');
             return $response;
-        }
+        //}
     }
 
     public function authentification(Request $request, $user){

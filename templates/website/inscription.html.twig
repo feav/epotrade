@@ -223,7 +223,7 @@
               </div>
             </div>
           </div>
-          
+	          	
 		<div id="solution-popup">
 			{% for message in app.flashes('msg_to_valide_account') %}
 	          <div class="alert alert-warning alert-dismissible fade show alert-inscription" role="alert">
@@ -233,28 +233,38 @@
 				  </button>
 			  </div>
 	       {% endfor %}
-			<div class="solution-container shadow" >
+			<div class="solution-container" >
 				<div class="progress-container" style="position: relative;">
-					<div id="line-progress" data-stape="1"></div>
+					<div id="line-progress" data-stape="1" style="visibility:hidden"></div>
 					<div class="list-elt-bar">
-						<div class="item-elt-bar shadow active">
-							<div>Personal Details</div>
+						<div class="item-elt-bar active">
+							<span class="num-stape">1</span>
+							<span class="fa fa-check check num-stape"></span>
+							<div class="name-stape">Personal Details</div>
 						</div>
-						<div class="item-elt-bar shadow">
-							<div>More About You</div>
+						<div class="item-elt-bar">
+							<span class="num-stape">2</span>
+							<span class="fa fa-check check num-stape"></span>
+							<div class="name-stape">More About You</div>
 						</div>
-						<div class="item-elt-bar shadow">
-							<div>Account Configuration</div>
+						<div class="item-elt-bar">
+							<span class="num-stape">3</span>
+							<span class="fa fa-check check num-stape"></span>
+							<div class="name-stape">Account Configuration</div>
 						</div>
-						<div class="item-elt-bar shadow">
-							<div>Confirm Your ID</div>
+						<div class="item-elt-bar">
+							<span class="num-stape">4</span>
+							<span class="fa fa-check check num-stape"></span>
+							<div class="name-stape">Confirm Your ID</div>
 						</div>
-						<div class="item-elt-bar shadow">
-							<div>Fund your Account</div>
+						<div class="item-elt-bar">
+							<span class="num-stape">1</span>
+							<span class="fa fa-check check num-stape"></span>
+							<div class="name-stape">Fund your Account</div>
 						</div>
 					</div>
 				</div>
-				<div class="solution-container" style="position: relative;">
+				<div class="solution-container shadow" style="position: relative;background: #fff; padding: 30px;">
 					<div class="lds-ripple"><div></div><div></div></div>
                     <div class="success-checkmark">
                       <div class="check-icon">

@@ -251,12 +251,12 @@
 	<hr class="underline-title">
 </div>
 <div class="wiz-top-desc"></div>
-<form class="card card-body" method="POST" id="infoPersonnelle" id="infoPersonnelle">
+<form class="card card-body" method="POST" id="infoPersonnelle" id="infoPersonnelle" data-logged="{{ app.user is not null ? 'logged' : '' }}">
     <div class="form-row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="planner-name">Prénom</label>
-          <input type="text" name="prenom" class="form-control" id="prenom" value="{{informations is not null ? informations.prenom : user.prenom }}">
+          <input type="text" name="prenom" class="form-control" id="prenom" value="{{informations is not null ? informations.prenom : '' }}">
         </div>
       </div>
       <div class="col-sm-6">
@@ -290,13 +290,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input type="email" name="email" class="form-control" value="{{informations is not null ? informations.email : user.email}}" id="email" placeholder="">
+          <input type="email" name="email" class="form-control" value="{{informations is not null ? informations.email : ''}}" id="email" placeholder="">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="telephone">Numéro de téléphone</label>
-          <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Ex:0033548895" value="{{informations is not null ? informations.telephone : user.telephone}}">
+          <input type="text" name="telephone" class="form-control" id="telephone" placeholder="Ex:0033548895" value="{{informations is not null ? informations.telephone : ''}}">
         </div>
       </div>
     </div>

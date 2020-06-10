@@ -17,20 +17,20 @@
             $('#solution-popup .prenom-content').css('display', 'inline-block');
         }
         
-        $('.item-elt-bar').css('width', widthItem+'%');
+        //$('.item-elt-bar').css('width', widthItem+'%');
         currentstape = parseInt($('#line-progress').data('stape'));
 
         /* Zone d'animation de la timeline */
-        if(currentstape <= sizeTimelineVisible ){
+        /*if(currentstape <= sizeTimelineVisible ){
             widthCal = ((currentstape) * 100)/(sizeTimelineVisible); 
             if(widthCal > ((sizeTimelineVisible-1)/(sizeTimelineVisible))*100)
                 $('#line-progress').css('width', widthCal+'%')
             else
                 $('#line-progress').css('width', (widthCal-0.3)+'%')
-            /*for (var i = 1; i < currentstape; i++) {
-                $('.item-elt-bar').eq(i).addClass('completed');
-            }*/
-        }
+            //for (var i = 1; i < currentstape; i++) {
+            //    $('.item-elt-bar').eq(i).addClass('completed');
+            //}
+        }*/
     }
     procedStape();
 
@@ -151,6 +151,39 @@
                     console.log(error)
                 }
             }
+            function registration(oReq){
+                oReq.open("POST", $('body').data('base-url')+"register/register-xhr", true);
+                oReq.onload = function(oEvent) {
+                    if (oReq.status == 200) {
+                        console.log(oReq.response);
+                        toastr.success("inscription réussite. Consulter vos mail afin de valider votre compte");
+                        saveInfoPerso();
+                    } else {
+                        console.log(oReq.response);
+                        toastr.error(oReq.response);
+                        submitting("reset");
+                        return false;
+                    }
+                };
+                oReq.send(oData);
+            }
+            function saveInfoPerso(){
+                oReq.open("POST", $('body').data('base-url')+'inscription/save-infos-pers', true);
+                oReq.onload = function(oEvent) {
+                    if (oReq.status == 200) {
+                        console.log(oReq.response);
+                        toastr.success("Enregistrement reussi");
+                        submitting("reset");
+                        gotoNext();
+                    } else {
+                        console.log(oReq.response);
+                        toastr.error(oReq.response);
+                        submitting("reset");
+                        return false;
+                    }
+                };
+                oReq.send(oData);
+            }
             if( !validate()){
                 toastr.error("Tous les champs sont obligatoires.");
                 return false;
@@ -160,19 +193,10 @@
                 submitting("loading");
                 oData = new FormData(form);
                 var oReq = new XMLHttpRequest();
-                oReq.open("POST", $('body').data('base-url')+'inscription/save-infos-pers', true);
-                oReq.onload = function(oEvent) {
-                    if (oReq.status == 200) {
-                        toastr.success("Enregistrement reussi");
-                        submitting("reset");
-                        gotoNext();
-                    } else {
-                        toastr.error(oReq.response);
-                        submitting("reset");
-                        return false;
-                    }
-                };
-                oReq.send(oData);  
+                if($('#infoPersonnelle').data('logged') == "logged")
+                    saveInfoPerso(oReq);
+                else
+                    registration(oReq);
             } 
         }
         else if(stape == 2){
@@ -316,7 +340,6 @@
         }
         return false;
     }
-
     submitting = function(state){
         if(state == "loading"){
             $('.lds-ripple').css('display','inline-block');

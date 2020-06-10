@@ -27,11 +27,15 @@ class InscriptionController extends AbstractController
     }
 	public function inscription(Request $request)
     {	
-    	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    	//$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $informations = null;
     	$user = $this->security->getUser();
-    	$informations = $this->informationRepository->findOneBy(['user'=>$user->getId()]);
+        if(!is_null($user)){
+            $informations = $this->informationRepository->findOneBy(['user'=>$user->getId()]);
+        }
+    	
     	$em = $this->getDoctrine()->getManager();
-		return $this->render('website/inscription.html.twig', ['informations'=>$informations, 'user'=>$user]);
+		return $this->render('website/inscription.html.twig', ['informations'=>$informations]);
 	}
 	public function saveInfoPersoXhr(Request $request)
     {	

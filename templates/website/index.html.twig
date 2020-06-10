@@ -215,7 +215,7 @@
 		            <div class="col-md-9 col-lg-6 col-xl-5 pl-lg-5 pl-xl-0">
 		               <h1 class="display-5 mb-2">Créez-vous un<br>complément de revenus<br>pendant le confinement !</h1>
 		               <p class="lead">Nous gagnons que si vous gagnez...</p>
-		               <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" data-id="je_minscris-form" class="je-minscris btn btn-primary-3 btn-lg">Je m'inscris !</a>
+		               <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" class="je-minscris btn btn-primary-3 btn-lg">Je m'inscris !</a>
 		            </div>
 		            <div class="col-md-10 col-lg-6 col-xl mt-4 mt-md-5 mt-lg-0">
 		               <div class="d-flex position-relative align-items-center justify-content-center rounded shadow-lg">
@@ -373,7 +373,7 @@
 	                     <p>
 	                        Connectez-vous à votre compte EpoTrade dans la section "Signaux ouvert" puis cliquez sur le premier signaux faite "Copier".
 	                     </p>
-	                     <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" data-id="je_minscris-form" class="je-minscris">Je m'inscris pour suivre les signaux.</a>
+	                     <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" class="je-minscris">Je m'inscris pour suivre les signaux.</a>
 	                  </div>
 	               </li>
 	               <li class="d-flex align-items-start my-4 my-md-5">
@@ -542,7 +542,7 @@
 	                     </div>
 	                  </li>
 	               </ul>
-	               <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" data-id="je_minscris-form" class="je-minscris" class="btn btn-lg btn-block btn-primary">Je m'inscris !</a>
+	               <a href="{% if app.user is not null and app.user.username %} {{path('inscription_home')}} {% else %} javascript:void() {% endif %}" class="je-minscris" class="btn btn-lg btn-block btn-primary">Je m'inscris !</a>
 	            </div>
 	         </div>
 	         <div class="col-sm-9 col-md-7 col-lg-4 mb-3 mb-md-4 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
@@ -613,7 +613,7 @@
 		            <a href="https://wa.me/237656645659" target="_blank" class="btn btn-sm btn-outline-light fade-page mt-3" style="font-size: 21px;line-height: 30px;padding-top: 7px;color: #009b72;border-color: #009b7230;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" style=" height: 24px; margin-bottom: 3px; "> 06 85 74 52 15</a>
 		        </div>
 		    </div>
-		    <div class="row justify-content-center" id="je_minscris-form">
+		    <div class="row justify-content-center" id="je_minscris-form" style="display:none">
 		        <div class="col-xl-5 col-lg-6 col-md-7">
 		            <form name="formInscription" id="formInscription" method="POST" class="fos_user_registration_register d-flex flex-column" style="position:relative">
 		               <input class="form-control h-100" type="text" name="prenom" placeholder="Prénom">
