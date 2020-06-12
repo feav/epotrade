@@ -84,10 +84,10 @@ class AbonneController extends AbstractController
             $tabMail[] = $user->getEmail();
             if($message !=""){
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
+                curl_setopt($ch, CURLOPT_URL, 'https://eu140.chat-api.com/instance137096/sendMessage?token=9girba15379ax0ys');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=*".strtoupper($sujet)."* ".$message."");
+                curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$message."");
 
                 $headers = array();
                 $headers[] = 'Content-Type: application/x-www-form-urlencoded';
