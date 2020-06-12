@@ -20,6 +20,9 @@ class AbonneController extends AbstractController
 	private $userRepository;
 	private $params;
     private $mailer;
+    private $msgLink = "https://eu140.chat-api.com/instance137096/";
+    private $key = "9girba15379ax0ys";
+    
 	public function __construct(Security $security, InformationRepository $informationRepository, UserRepository $userRepository, ParameterBagInterface $params, \Swift_Mailer $mailer)
     {
         $this->security = $security;

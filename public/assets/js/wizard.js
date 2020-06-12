@@ -155,11 +155,10 @@
                 oReq.open("POST", $('body').data('base-url')+"register/register-xhr", true);
                 oReq.onload = function(oEvent) {
                     if (oReq.status == 200) {
-                        console.log(oReq.response);
                         toastr.success("inscription réussite. Consulter vos mail afin de valider votre compte");
+                        $('#infoPersonnelle input[name=password]').val(oReq.response);
                         saveInfoPerso();
                     } else {
-                        console.log(oReq.response);
                         toastr.error(oReq.response);
                         submitting("reset");
                         return false;
@@ -168,21 +167,22 @@
                 oReq.send(oData);
             }
             function saveInfoPerso(){
-                oReq.open("POST", $('body').data('base-url')+'inscription/save-infos-pers', true);
-                oReq.onload = function(oEvent) {
-                    if (oReq.status == 200) {
-                        console.log(oReq.response);
+                var form2 = document.forms.namedItem("infoPersonnelle");
+                oData2 = new FormData(form2);
+                var oReq2 = new XMLHttpRequest();
+                oReq2.open("POST", $('body').data('base-url')+'inscription/save-infos-pers', true);
+                oReq2.onload = function(oEvent) {
+                    if (oReq2.status == 200) {
                         toastr.success("Enregistrement reussi");
                         submitting("reset");
                         gotoNext();
                     } else {
-                        console.log(oReq.response);
-                        toastr.error(oReq.response);
+                        toastr.error(oReq2.response);
                         submitting("reset");
                         return false;
                     }
                 };
-                oReq.send(oData);
+                oReq2.send(oData2);
             }
             if( !validate()){
                 toastr.error("Tous les champs sont obligatoires.");

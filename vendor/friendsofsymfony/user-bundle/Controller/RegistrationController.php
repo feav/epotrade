@@ -111,9 +111,10 @@ class RegistrationController extends Controller
                     $response = new Response(json_encode($error), 500);
                 }
                 else{
+                    $password = $this->generatePassword();
                     $user->setEmail($email);
                     $user->setEmailCanonical($email);
-                    $user->setPlainPassword("mot_de_passe");
+                    $user->setPlainPassword($password);
                     $user->setPrenom($prenom);
                     $user->setTelephone($telephone);
                     $user->setLastLogin(new \DateTime());
@@ -135,7 +136,7 @@ class RegistrationController extends Controller
 
                     $this->eventDispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
                     //return $response;    
-                    $response = new Response(json_encode("inscription reussite"), 200);
+                    $response = new Response(json_encode($password), 200);
                     $this->authentification($request, $user);
                     $this->addFlash("msg_to_valide_account", "N'oubliez pas valider votre compte en cliquant sur le lien qui vous a été par mail");
                 }
@@ -144,6 +145,29 @@ class RegistrationController extends Controller
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         //}
+    }
+
+    public function generatePassword(){
+        $nb_a_tirer = 4;
+
+        $val_min = 0;
+
+        $val_max = 9;
+
+        $tab_rang = "";
+        while($nb_a_tirer != 0 ){
+            $tab_rang .= mt_rand($val_min, $val_max);
+            $nb_a_tirer--;
+        }
+        $alphabet="abcdefghijklmnopqrstuvwxyz";
+        for ($i=0; $i <4 ; $i++) { 
+          $lettre_aleatoire=$alphabet[rand(0,25)];
+          $tab_rang .=$lettre_aleatoire;
+        }
+        
+        $tab_rang = "@".$tab_rang."_";
+        
+        return strtolower (str_shuffle($tab_rang));
     }
 
     public function authentification(Request $request, $user){
