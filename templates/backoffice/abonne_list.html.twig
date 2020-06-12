@@ -94,20 +94,19 @@
                             </thead>
                             <tbody>
                             	{% for user in users %}
-                                    {% if user.information is not null  %}
                                 		<tr>
     	                                    <td>{{user.id}}</td>
-    	                                    <td>{{user.information.prenom ?? user.prenom}}</td>
-    	                                    <td>{{user.information.getNomFamille}}</td>
-    	                                    <td>{{user.information.email ?? user.email}}</td>
-    	                                    <td>{{user.information.telephone ?? user.telephone}}</td>
-    	                                    <td>{{user.information.getPaysResidence}}</td>
-    	                                    <td>{{user.information.getDepotEstime}}</td>
-    	                                    <td>{{user.information.devise}}</td>
+    	                                    <td>{{ user.information is not null ? user.information.prenom : user.prenom}}</td>
+    	                                    <td>{{user.information is not null ? user.information.getNomFamille : "" }}</td>
+    	                                    <td>{{user.information is not null ? user.information.email : user.email}}</td>
+    	                                    <td>{{ user.information is not null ? user.information.telephone : user.telephone}}</td>
+    	                                    <td>{{ user.information is not null ? user.information.getPaysResidence : "" }}</td>
+    	                                    <td>{{ user.information is not null ? user.information.getDepotEstime : "" }}</td>
+    	                                    <td>{{ user.information is not null ? user.information.devise : '' }}</td>
     	                                    <td>
-    	                                    	{% if user.information.getIsCreate %}
+    	                                    	{% if user.information is not null and user.information.getIsCreate %}
     	                                    		Abonné crée
-    						                    {% else %}
+    						                    {% elseif user.information is not null %}
     						                        {{user.information.getIsComplete ? 'Complet':'pas complet'}}
     						                    {% endif %}
     		                                </td>
@@ -115,13 +114,7 @@
     	                                    	<a href="{{path('informations_abonne', {'id':user.id})}}" style="text-decoration: underline;">Voir</a>
     	                                    </td>
     	                                </tr>
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="10" style="text-align:center">
-                                                Aucune informations fournis
-                                            </td>
-                                        </tr>
-                                    {% endif %}
+                                    
                             	{% endfor %}
                             </tbody>
                             <tfoot>
