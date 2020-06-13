@@ -23,6 +23,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/custom_dt_zero_config.css')}}">
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
+    <link href="{{asset('assetsDash/plugins/animate/animate.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assetsDash/assets/css/modals/component.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <link href="{{asset('assetsDash/assets/css/ui-kit/custom-modal.css')}}" rel="stylesheet" type="text/css" />
 
     <style type="text/css">
     	.desktop-nav.header{padding: 0 10px}
@@ -74,6 +80,28 @@
 		    border: 2px solid #e9ecef;
 		}
     </style>
+    <style type="text/css">
+        .btn-difussion{width: auto;}
+        .row-head-box{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .md-close{
+            position: absolute;
+            top: 5px;
+            right: 17px;
+            cursor: pointer;
+        }
+        .md-modal{
+            top: 51px;
+            transform: translateX(-50%);
+        }
+        #diffusion_message .form-control{border-radius: 4px;}
+        #diffusion_message small{font-style: italic;}
+        .no-click{pointer-events: none;}
+    </style>
+
 {% endblock %}
 {% block class %}default-sidebar{% endblock %}
 
@@ -127,10 +155,26 @@
                 <nav id="modernSidebar">
                     <ul class="menu-categories pl-0 m-0" id="topAccordion">
                         <li class="menu">
-                            <a href="{{path('list_abonne')}}"  class="open">
+                            <a href="{{path('list_abonne')}}"  class="abonne">
                                 <div class="">
                                     <i class="flaticon-user-group"></i>
                                     <span>Abonnés</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="menu">
+                            <a href="{{path('list_abonne',{'abonne':'inscrit'})}}"  class="inscrit">
+                                <div class="">
+                                    <i class="flaticon-user-group-2"></i>
+                                    <span>Inscrits</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="menu">
+                            <a href="{{path('signaux_index')}}"  class="signaux">
+                                <div class="">
+                                    <i class="flaticon-chart"></i>
+                                    <span>Signaux</span>
                                 </div>
                             </a>
                         </li>
@@ -143,9 +187,53 @@
         <!--  BEGIN CONTENT PART  -->
         <div id="content" class="main-content">
             <div class="container">
-            	{% block body_dash %}
-            	    
-            	{% endblock %}
+                <div class="row" id="cancel-row">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-header">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12 row-head-box">
+                                        {% block title_page %}
+                                        {% endblock %}
+                                        <button class="btn btn-button-4 rounded btn-block md-trigger btn-difussion" data-modal="modal-10">Envoyer des messages</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-modal md-effect-10" id="modal-10">
+                                <div class="md-content">
+                                    <div>
+                                        <span class="md-close">X</span>
+                                        <form method="POST" action="{{path('diffusion_message')}}" id="diffusion_message" name="diffusion_message" enctype="multipart/form-data">
+                                            <div class="form-group">
+                                                <label>Sujet <small>(important pour le mail) <b>optionnel</b></small></label>
+                                                <input type="text" name="sujet" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Entrer le message à envoyer <small>(message text)<b>optionnel</b></small></label>
+                                                <textarea class="form-control" rows="4" name="message" style="border-radius: 4px;font-size: 14px"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fichier <small>(message image)<b>optionnel</b></small></label>
+                                                <input type="file" name="fichier" class="form-control">
+                                            </div>
+                                            <!--<div class="form-group">
+                                                <label>Lien <small>(message lien)<b>optionnel</b></small></label>
+                                                <input type="text" name="lien" class="form-control">
+                                            </div>-->
+                                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-overlay"></div>
+                            <div class="widget-content widget-content-area">
+                            	{% block body_dash %}
+                            	    
+                            	{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--  END CONTENT PART  -->
@@ -222,6 +310,9 @@
     <script src="{{asset('assetsDash/plugins/progressbar/progressbar.min.js')}}"></script>
     <script src="{{asset('assetsDash/assets/js/default-dashboard/default-custom.js')}}"></script>
 
+    <script src="{{asset('assetsDash/assets/js/modal/classie.js')}}"></script>
+    <script src="{{asset('assetsDash/assets/js/modal/modalEffects.js')}}"></script>
+
     <script src="{{asset('assetsDash/plugins/table/datatable/datatables.js')}}"></script>
     <script>
         $('#zero-config').DataTable({
@@ -231,5 +322,64 @@
             }
         });
     </script>
+
+    <script>
+        /*var form = document.forms.namedItem("diffusion_message");
+        submitting("loading");
+        oData = new FormData(form);
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "{{path('diffusion_message')}}", true);
+        oReq.onload = function(oEvent) {
+            if (oReq.status == 200) {
+                toastr.success("Message envoyé avec success");
+                submitting("reset");
+                gotoNext();
+            } else {
+                toastr.error("Une erreur s'est produit lors de l'envoie du message");
+                submitting("reset");
+                return false;
+            }
+        };
+        oReq.send(oData);*/
+
+        submitting = function(state){
+            if(state == "loading"){
+                $('#diffusion_message button[type=submit]').text('Envoie en cours...');
+                $('#diffusion_message button[type=submit]').addClass('no-click');
+            }
+            else if(state == "reset"){
+                $('#diffusion_message button[type=submit]').text('Envoyer');
+                $('#diffusion_message button[type=submit]').removeClass('no-click');
+            }
+        }
+
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+          $('[data-toggle="popover"]').popover()
+        })
+        $('#yt-video-link').click(function () {
+            var src = 'https://www.youtube.com/embed/YE7VzlLtp-4';
+            $('#videoMedia1').modal('show');
+            $('<iframe>').attr({
+                'src': src,
+                'width': '560',
+                'height': '315',
+                'allow': 'encrypted-media'
+            }).css('border', '0').appendTo('#videoMedia1 .video-container');
+        });
+        $('#vimeo-video-link').click(function () {
+            var src = 'https://player.vimeo.com/video/1084537';
+            $('#videoMedia2').modal('show');
+            $('<iframe>').attr({
+                'src': src,
+                'width': '560',
+                'height': '315',
+                'allow': 'encrypted-media'
+            }).css('border', '0').appendTo('#videoMedia2 .video-container');
+        });
+        $('#videoMedia1 button, #videoMedia2 button').click(function () {
+            $('#videoMedia1 iframe, #videoMedia2 iframe').removeAttr('src');
+        });
+    </script> 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 {% endblock %}

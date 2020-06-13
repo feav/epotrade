@@ -14,15 +14,19 @@
 				Statut d'emploi 
 			</div>
 			<div class="list-inner-elt">
-				<input id="employe" type="radio" name="statut_emploi" value="Employé">
+				<input id="employe" type="radio" name="statut_emploi" value="Employé"
+				{% if  informations is not null and informations.getStatusEmploi == "Employé" %}checked{% endif %}>
 				<label class="item-elt label-form" for="employe">Employé</label>
-				<input id="travaileur_independant" type="radio" name="statut_emploi" value="Travailleur indépendant">
+				<input id="travaileur_independant" type="radio" name="statut_emploi" value="Travailleur indépendant" {% if  informations is not null and informations.getStatusEmploi == "Travailleur indépendant" %}checked{% endif %}>
 				<label for="travaileur_independant" class="item-elt label-form">Travailleur indépendant</label>
-				<input id="retraite" type="radio" name="statut_emploi" value="Retraité">
+				<input id="retraite" type="radio" name="statut_emploi" value="Retraité"
+				{% if  informations is not null and informations.getStatusEmploi == "Retraité" %}checked{% endif %}>
 				<label for="retraite" class="item-elt label-form">Retraité</label>
-				<input id="etudiant" type="radio" name="statut_emploi" value="Étudiant">
+				<input id="etudiant" type="radio" name="statut_emploi" value="Étudiant"
+				{% if  informations is not null and informations.getStatusEmploi == "Étudiant" %}checked{% endif %}>
 				<label for="etudiant" class="item-elt label-form">Étudiant</label>
-				<input id="sans_emploi" type="radio" name="statut_emploi" value="Sans emploi">
+				<input id="sans_emploi" type="radio" name="statut_emploi" value="Sans emploi"
+				{% if  informations is not null and informations.getStatusEmploi == "Sans emploi" %}checked{% endif %}>
 				<label for="sans_emploi" class="item-elt label-form">Sans emploi</label>
 			</div>
 		</div>
@@ -33,9 +37,11 @@
 				Revenu annuel estimé 
 			</div>
 			<div class="list-inner-elt">
-				<input id="revenu_1" type="radio" name="revenue_annuel" value="0 - 18 200 $">
+				<input id="revenu_1" type="radio" name="revenue_annuel" value="0 - 18 200 $" 
+				{% if  informations is not null and informations.getRevenueAnnuel == "0 - 18 200 $" %}checked{% endif %}>
 				<label class="item-elt label-form" for="revenu_1">0 - 18 200 $</label>
-				<input id="revenu_2" type="radio" name="revenue_annuel" value="18 201 $ - 37 000 $">
+				<input id="revenu_2" type="radio" name="revenue_annuel" value="18 201 $ - 37 000 $"
+				{% if  informations is not null and informations.getRevenueAnnuel == "18 201 $ - 37 000 $" %}checked{% endif %}>
 				<label for="revenu_2" class="item-elt label-form">18 201 $ - 37 000 $</label>
 				<input id="revenu_3" type="radio" name="revenue_annuel" value="37 001 $ - 90 000 $">
 				<label for="revenu_3" class="item-elt label-form">37 001 $ - 90 000 $</label>
@@ -69,6 +75,9 @@
 				<input id="economie_8" type="radio" name="invest_economie" value="10 M $ +">
 				<label for="economie_8" class="item-elt label-form">10 M $ +</label>
 			</div>
+			<script type="text/javascript">
+				$('input[value={{ informations is not null ? informations.getEconomieInvestissement : '' }}]').attr('checked', 'checked') ;
+			</script>
 		</div>
 		<hr class="separate-row-infos">
 
@@ -92,6 +101,9 @@
 				<input id="depot_7" type="radio" name="depot" value="1 M $ +">
 				<label for="depot_7" class="item-elt label-form">1 M $ +</label>
 			</div>
+			<script type="text/javascript">
+				$('input[value={{ informations is not null ? informations.getDepotEstime : '' }}]').attr('checked', 'checked') ;
+			</script>
 		</div>
 		<hr class="separate-row-infos">
 
@@ -123,6 +135,9 @@
 				<input id="source_fond_11" type="radio" name="source_fond" value="Économies grâce à un emploi antérieur">
 				<label for="source_fond_11" class="item-elt label-form">Économies grâce à un emploi antérieur</label>
 			</div>
+			<script type="text/javascript">
+				$('input[value={{ informations is not null ? informations.getSourceFond : '' }}]').attr('checked', 'checked') ;
+			</script>
 		</div>
 		<hr class="separate-row-infos">
 
@@ -149,6 +164,9 @@
 				<input id="transaction_5" type="radio" name="nbr_transaction" value="180 000 $ et plus">
 				<label for="transaction_5" class="item-elt label-form">180 000 $ et plus</label>
 			</div>
+			<script type="text/javascript">
+				$('input[value={{ informations is not null ? informations.getNbTransaction : '' }}]').attr('checked', 'checked') ;
+			</script>
 		</div>
 		<hr class="separate-row-infos">
 
@@ -166,6 +184,9 @@
 				<input id="qte_echange_4" type="radio" name="qte_echange" value="2,5 K $ +">
 				<label for="qte_echange_4" class="item-elt label-form">2,5 K $ +</label>
 			</div>
+			<script type="text/javascript">
+				$('input[value={{ informations is not null ? informations.getQteEchangeSemaine : '' }}]').attr('checked', 'checked') ;
+			</script>
 		</div>
 		<hr class="separate-row-infos">
 	</div>

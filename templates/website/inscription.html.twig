@@ -235,14 +235,14 @@
 	       {% endfor %}
 			<div class="solution-container" >
 				<div class="progress-container" style="position: relative;">
-					<div id="line-progress" data-stape="1" style="visibility:hidden"></div>
+					<div id="line-progress" data-stape="{{ informations is not null ? informations.stape : 1 }}" style="visibility:hidden"></div>
 					<div class="list-elt-bar">
 						<div class="item-elt-bar active">
 							<span class="num-stape">1</span>
 							<span class="fa fa-check check num-stape"></span>
 							<div class="name-stape">Personal Details</div>
 						</div>
-						<div class="item-elt-bar">
+						<div class="item-elt-bar ">
 							<span class="num-stape">2</span>
 							<span class="fa fa-check check num-stape"></span>
 							<div class="name-stape">More About You</div>
@@ -258,7 +258,7 @@
 							<div class="name-stape">Confirm Your ID</div>
 						</div>
 						<div class="item-elt-bar">
-							<span class="num-stape">1</span>
+							<span class="num-stape">5</span>
 							<span class="fa fa-check check num-stape"></span>
 							<div class="name-stape">Fund your Account</div>
 						</div>
@@ -275,10 +275,10 @@
                       </div>
                     </div>
 					<div class="solution-stape-list" style="padding: 0 10px;">
-						<div class="stape-item active animated fadeIn">
+						<div class="stape-item animated active fadeIn">
 							{{ include("website/inscription/detail_personnel.html.twig") }}
 						</div>
-						<div class="stape-item animated fadeIn">
+						<div class="stape-item animated  fadeIn">
 							{{ include("website/inscription/apropos_de_moi.html.twig") }}
 						</div>
 						<div class="stape-item animated fadeIn">
@@ -294,13 +294,15 @@
 							</p>
 						</div>
 					</div>
+					<div class="stape-nav">
+						
+					 <div class="content-nav-btn" {% if informations is not null and informations.stape > 4 %} style="display:none" {% endif %}>
+					     <!--<span class="btn-prev btn">PRECEDENT</span>-->
+					     <span class="btn-next btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3 {% if (informations is not null) and (informations.getIsCreate) %} inscription-complete {% endif %} ">SUIVANT</span>
+					 </div>
+					</div>
 				</div>
-				<div class="stape-nav">
-				 <div class="content-nav-btn">
-				     <span class="btn-prev btn">PRECEDENT</span>
-				     <span class="btn-next btn btn-primary ml-lg-4 mr-3 mr-md-4 mr-lg-0 d-none d-sm-block order-lg-3 {% if (informations is not null) and (informations.getIsCreate) %} inscription-complete {% endif %} ">SUIVANT</span>
-				 </div>
-				</div>
+				
 			</div>
 		</div>
 
@@ -350,5 +352,21 @@
 		    $elt = $(this).data('id');
 		    $('html, body').animate({scrollTop:($("#solution-popup").offset().top)-100}, speed);
 		});
+		$initStape = $('#line-progress').data('stape');
+		console.log($initStape);
+		$('.item-elt-bar').removeClass('active');
+		$('.stape-item').removeClass('active');
+		for(var i = 1; i< $initStape; i++){
+			$('.item-elt-bar').eq(i-1).addClass('completed');
+		}
+		if($initStape == $('.item-elt-bar').length){
+			$('.item-elt-bar').eq($initStape-1).addClass('active');
+			$('.item-elt-bar').eq($initStape-1).addClass('completed');
+		}
+		if($initStape > 1){
+			$('#solution-popup .btn-prev').css('display', 'block');
+		}
+		$('.item-elt-bar').eq($initStape-1).addClass('active');
+		$('.stape-item').eq($initStape-1).addClass('active');
 	</script>
 {% endblock %}

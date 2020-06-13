@@ -34,6 +34,9 @@
 		        {% for message in app.flashes('error') %}
 		            toastr.error("{{ message }}");
 		        {% endfor %}
+		        {% for message in app.flashes('infos') %}
+		            toastr.infos("{{ message }}");
+		        {% endfor %}
 		        {% for message in app.flashes('warning') %}
 		            toastr.warning("{{ message }}");
 		        {% endfor %}

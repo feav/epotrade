@@ -177,12 +177,18 @@ class Information
      */
     private $is_create;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $stape;
+
     public function __construct()
     {
         $this->cgu = false;
         $this->is_referred = false;
         $this->is_complete = false;
         $this->is_create = false;
+        $this->stape = 1;
     }
 
     public function getId(): ?int
@@ -570,6 +576,18 @@ class Information
     public function setIsCreate(?bool $is_create): self
     {
         $this->is_create = $is_create;
+
+        return $this;
+    }
+
+    public function getStape(): ?int
+    {
+        return $this->stape;
+    }
+
+    public function setStape(?int $stape): self
+    {
+        $this->stape = $stape;
 
         return $this;
     }

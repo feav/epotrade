@@ -6,205 +6,89 @@
 
 {% block stylesheets %}
 	{{parent()}}
-    <link href="{{asset('assetsDash/plugins/animate/animate.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assetsDash/assets/css/modals/component.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS -->
-    
-    <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link href="{{asset('assetsDash/assets/css/ui-kit/custom-modal.css')}}" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .btn-difussion{width: auto;}
-        .row-head-box{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .md-close{
-            position: absolute;
-            top: 5px;
-            right: 17px;
-            cursor: pointer;
-        }
-        .md-modal{
-            top: 51px;
-            transform: translateX(-50%);
-        }
-        #diffusion_message .form-control{border-radius: 4px;}
-        #diffusion_message small{font-style: italic;}
-        .no-click{pointer-events: none;}
-    </style>
+
+{% endblock %}
+
+{% block title_page %}
+    {% if( abonne == 'abonne' ) %}
+        <h4>Liste d'abonnés</h4>
+    {% else %}
+        <h4>Liste inscrit</h4>
+    {% endif %}
 {% endblock %}
 
 {% block body_dash %}
-    <div class="row" id="cancel-row">
-    
-        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-            <div class="statbox widget box box-shadow">
-                <div class="widget-header">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-12 col-sm-12 col-12 row-head-box">
-                            <h4>Liste d'abonnés</h4>
-                            <button class="btn btn-button-4 rounded btn-block md-trigger btn-difussion" data-modal="modal-10">Envoyer des messages</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="md-modal md-effect-10" id="modal-10">
-                    <div class="md-content">
-                        <div>
-                            <span class="md-close">X</span>
-                            <form method="POST" action="{{path('diffusion_message')}}" id="diffusion_message" name="diffusion_message" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <label>Sujet <small>(important pour le mail) <b>optionnel</b></small></label>
-                                    <input type="text" name="sujet" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Entrer le message à envoyer <small>(message text)<b>optionnel</b></small></label>
-                                    <textarea class="form-control" rows="4" name="message" style="border-radius: 4px;font-size: 14px"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Fichier <small>(message image)<b>optionnel</b></small></label>
-                                    <input type="file" name="fichier" class="form-control">
-                                </div>
-                                <!--<div class="form-group">
-                                    <label>Lien <small>(message lien)<b>optionnel</b></small></label>
-                                    <input type="text" name="lien" class="form-control">
-                                </div>-->
-                                <button type="submit" class="btn btn-primary">Envoyer</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="md-overlay"></div>
-                <div class="widget-content widget-content-area">
-                    <div class="table-responsive mb-4">
-                        <table id="zero-config" class="table table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Prenom</th>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Telephone</th>
-                                    <th>Pays residence</th>
-                                    <th>Depot estime</th>
-                                    <th>Devise</th>
-                                    <th>Etat</th>
-                                    <th class="invisible"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            	{% for user in users %}
-                                		<tr>
-    	                                    <td>{{user.id}}</td>
-    	                                    <td>{{ user.information is not null ? user.information.prenom : user.prenom}}</td>
-    	                                    <td>{{user.information is not null ? user.information.getNomFamille : "" }}</td>
-    	                                    <td>{{user.information is not null ? user.information.email : user.email}}</td>
-    	                                    <td>{{ user.information is not null ? user.information.telephone : user.telephone}}</td>
-    	                                    <td>{{ user.information is not null ? user.information.getPaysResidence : "" }}</td>
-    	                                    <td>{{ user.information is not null ? user.information.getDepotEstime : "" }}</td>
-    	                                    <td>{{ user.information is not null ? user.information.devise : '' }}</td>
-    	                                    <td>
-    	                                    	{% if user.information is not null and user.information.getIsCreate %}
-    	                                    		Abonné crée
-    						                    {% elseif user.information is not null %}
-    						                        {{user.information.getIsComplete ? 'Complet':'pas complet'}}
-    						                    {% endif %}
-    		                                </td>
-    	                                    <td>
-    	                                    	<a href="{{path('informations_abonne', {'id':user.id})}}" style="text-decoration: underline;">Voir</a>
-    	                                    </td>
-    	                                </tr>
-                                    
-                            	{% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Prenom</th>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Telephone</th>
-                                    <th>Pays residence</th>
-                                    <th>Depot estime</th>
-                                    <th>Devise</th>
-                                    <th>Etat</th>
-                                    <th class="invisible"></th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="table-responsive mb-4">
+        <table id="zero-config" class="table table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th>Pays residence</th>
+                    <th>Depot estime</th>
+                    <th>Devise</th>
+                    <th>Etat</th>
+                    <th class="invisible"></th>
+                </tr>
+            </thead>
+            <tbody>
+            	{% for user in users %}
+                		<tr>
+                            <td>{{user.id}}</td>
+                            <td>{{ user.information is not null ? user.information.prenom : user.prenom}}</td>
+                            <td>{{user.information is not null ? user.information.getNomFamille : "" }}</td>
+                            <td>{{user.information is not null ? user.information.email : user.email}}</td>
+                            <td>{{ user.information is not null ? user.information.telephone : user.telephone}}</td>
+                            <td>{{ user.information is not null ? user.information.getPaysResidence : "" }}</td>
+                            <td>{{ user.information is not null ? user.information.getDepotEstime : "" }}</td>
+                            <td>{{ user.information is not null ? user.information.devise : '' }}</td>
+                            <td>
+                            	{% if user.information is not null and user.information.getIsCreate %}
+                            		Abonné crée
+			                    {% elseif user.information is not null %}
+			                        {{user.information.getIsComplete ? 'Complet':'pas complet'}}
+			                    {% endif %}
+                            </td>
+                            <td style="text-align:center">
+                            	<a class="btn btn-primary" href="{{path('informations_abonne', {'id':user.id})}}">details</a>
+                                {% if( abonne == 'abonne' ) %}
+                                    <a class="btn btn-primary" href="{{path('abonne_action', {'user_id':user.id, 'abonne':'desabonne'})}}" style="margin-top:6px;">désabonner</a>
+                                {% else %}
+                                    <a class="btn btn-primary" href="{{path('abonne_action', {'user_id':user.id, 'abonne':'abonne'})}}" style="margin-top:6px;">abonné</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    
+            	{% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th>Pays residence</th>
+                    <th>Depot estime</th>
+                    <th>Devise</th>
+                    <th>Etat</th>
+                    <th class="invisible"></th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 {% endblock body_dash %}
 
 {% block javascripts %}
 	{{parent()}}
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="{{asset('assetsDash/assets/js/modal/classie.js')}}"></script>
-    <script src="{{asset('assetsDash/assets/js/modal/modalEffects.js')}}"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-
-    <!--  BEGIN CUSTOM SCRIPT FILE  -->
-    <script>
-        /*var form = document.forms.namedItem("diffusion_message");
-        submitting("loading");
-        oData = new FormData(form);
-        var oReq = new XMLHttpRequest();
-        oReq.open("POST", "{{path('diffusion_message')}}", true);
-        oReq.onload = function(oEvent) {
-            if (oReq.status == 200) {
-                toastr.success("Message envoyé avec success");
-                submitting("reset");
-                gotoNext();
-            } else {
-                toastr.error("Une erreur s'est produit lors de l'envoie du message");
-                submitting("reset");
-                return false;
-            }
-        };
-        oReq.send(oData);*/
-
-        submitting = function(state){
-            if(state == "loading"){
-                $('#diffusion_message button[type=submit]').text('Envoie en cours...');
-                $('#diffusion_message button[type=submit]').addClass('no-click');
-            }
-            else if(state == "reset"){
-                $('#diffusion_message button[type=submit]').text('Envoyer');
-                $('#diffusion_message button[type=submit]').removeClass('no-click');
-            }
-        }
-
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip()
-          $('[data-toggle="popover"]').popover()
-        })
-        $('#yt-video-link').click(function () {
-            var src = 'https://www.youtube.com/embed/YE7VzlLtp-4';
-            $('#videoMedia1').modal('show');
-            $('<iframe>').attr({
-                'src': src,
-                'width': '560',
-                'height': '315',
-                'allow': 'encrypted-media'
-            }).css('border', '0').appendTo('#videoMedia1 .video-container');
-        });
-        $('#vimeo-video-link').click(function () {
-            var src = 'https://player.vimeo.com/video/1084537';
-            $('#videoMedia2').modal('show');
-            $('<iframe>').attr({
-                'src': src,
-                'width': '560',
-                'height': '315',
-                'allow': 'encrypted-media'
-            }).css('border', '0').appendTo('#videoMedia2 .video-container');
-        });
-        $('#videoMedia1 button, #videoMedia2 button').click(function () {
-            $('#videoMedia1 iframe, #videoMedia2 iframe').removeAttr('src');
-        });
-    </script>    
-    <!--  END CUSTOM SCRIPT FILE  -->
+    <script type="text/javascript">
+        {% if abonne == "abonne" %}
+            $('#modernSidebar .menu > a.abonne').addClass('open');
+        {% else %}
+            $('#modernSidebar .menu > a.inscrit').addClass('open');
+        {% endif %}
+    </script>
 {% endblock %}

@@ -87,6 +87,7 @@ class InscriptionController extends AbstractController
     	$information->setVille($request->request->get('ville'));
     	$information->setCodePostale($request->request->get('codepostal'));
     	$information->setIsReferred((int)$request->request->get('referred'));
+        $information->setStape(2);
     	$em->persist($information);
     	$em->flush();
 
@@ -110,7 +111,7 @@ class InscriptionController extends AbstractController
     	$information->setSourceFond($request->request->get('source_fond'));
     	$information->setNbTransaction($request->request->get('nbr_transaction'));
     	$information->setQteEchangeSemaine($request->request->get('qte_echange'));
-
+        $information->setStape(3);
     	$em->persist($information);
     	$em->flush();
 
@@ -131,6 +132,7 @@ class InscriptionController extends AbstractController
     	$information->setTypeCompte($request->request->get('account_type'));
     	$information->setDevise($request->request->get('devise'));
     	$information->setCgu((int)$request->request->get('cgu'));
+        $information->setStape(4);
 
     	$em->persist($information);
     	$em->flush();
@@ -166,6 +168,7 @@ class InscriptionController extends AbstractController
             $fullAssetFile = $this->params->get('kernel.project_dir') . $assetFile;
             $information->setResidenceDoc($this->buildFiles([$request->files->get('residence')], ['jpg', 'png', 'jpeg'], 100000000, $fullAssetFile, false)[0]);
         }
+        $information->setStape(5);
 
     	$em->persist($information);
     	$em->flush();

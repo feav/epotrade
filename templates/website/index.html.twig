@@ -8,6 +8,7 @@
 
 {% block stylesheets %}
 	{{parent()}}
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <style type="text/css">
     	.lds-ripple {
 	        display: none;
@@ -349,7 +350,25 @@
       </div>
    </div>
 	</section>
+
 	<section class="bg-light o-hidden">
+	   <div class="container">
+	   	<div class="row section-title justify-content-center text-center">
+	         <div class="col-md-9 col-lg-8 col-xl-7">
+	            <h3 class="display-4">Historiques des sigaux</h3>
+	            <div class="lead" style="display:none">Les gains comme les pertes nous vous cachons rien.</div>
+	         </div>
+	      </div>
+	        <div class="row section-title justify-content-center text-center">
+	        	<div class="col-md-12">
+	        		<div id="myfirstchart" style="height: 350px;"></div>
+	        	</div>
+	     	</div>
+	    </div>
+	</section>
+
+
+	<section class="">
 	   <div class="container">
 	      <div class="row section-title justify-content-center text-center">
 	         <div class="col-md-9 col-lg-8 col-xl-7">
@@ -647,6 +666,34 @@
 
 {% block javascripts %}
 	{{parent()}}
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+	<script type="text/javascript">
+		var day_data = [
+		    {"elapsed": "01 JAN", "value": 34},
+		    {"elapsed": "01 FEB", "value": 24},
+		    {"elapsed": "01 MARCHT", "value": 3},
+		    {"elapsed": "01 APRIL", "value": 12},
+		    {"elapsed": "01 MAY", "value": 13},
+		    {"elapsed": "01 JUNE", "value": 22},
+		    {"elapsed": "01 JULY", "value": 5},
+		    {"elapsed": "01 AUGUST", "value": 26},
+		    {"elapsed": "01 SEPTEMBER", "value": 12},
+		];
+		new Morris.Line({
+		    element: 'myfirstchart',
+		    data: day_data,
+		    lineColors: ['#009b72'],
+		    pointFillColors:['#2c3038'],
+		    xkey: 'elapsed',
+		    ykeys: ['value'],
+		    labels: ['Gain'],
+		    parseTime: false
+		});
+
+	</script>
+	
 	<script type="text/javascript">
 		$('.je-minscris').click( function(e){ 
 		    var speed = 1200; 

@@ -1,0 +1,19 @@
+{% extends 'backoffice/layout.html.twig' %}
+{% block title %} {{parent()}} | Liste des abonnés {% endblock %}
+{% block meta %}
+    <meta name="description" content="">
+{% endblock %}
+
+{% block stylesheets %}
+    {{parent()}}
+
+{% endblock %}
+
+{% block title_page %}
+    <h4>Editer signaux</h4>
+{% endblock %}
+
+{% block body_dash %}
+	
+    {{ include('signaux/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

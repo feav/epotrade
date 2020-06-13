@@ -305,19 +305,22 @@
         <div class="col-sm-6">
             <div class="form-group">
               <label for="jour_naiss">Date de naissance</label>
+                {% set jour_naiss = informations is not null ? informations.getDateNaiss|date('d') : '' %}
+                {% set mois_naiss = informations is not null ? informations.getDateNaiss|date('m') : '' %}
+                {% set annee_naiss = informations is not null ? informations.getDateNaiss|date('Y') : '' %}
               <div class="position-relative list-elt-birth">
                 <div class="elt-birth">
                 	<select name="jour_naiss" class="custom-select" id="jour_naiss">
                 		<option value="" disabled>Jour</option>
                 		{% for i in 1..31 %}
-                		    <option value="{{i}}">{{i}}</option>
+                		    <option value="{{i}}" {% if jour_naiss == i  %}selected{% endif %}>{{i}}</option>
                 		{% endfor %}
                     </select>
                 </div>
                 <div class="elt-birth" style="flex: 2">
                 	<select name="mois_naiss" class="custom-select" id="mois_naiss">
                 		{% for m in mois %}
-                			<option value="{{m.number}}">{{m.val}}</option>
+                			<option value="{{m.number}}" {% if mois_naiss == m.number  %}selected{% endif %}>{{m.val}}</option>
                 		{% endfor %}
                     </select>
                 </div>
@@ -325,7 +328,7 @@
                 	<select name="annee_naiss" class="custom-select" id="annee_naiss">
                 		<option value="" disabled>Année</option>
                 		{% for i in 2002..1987 %}
-                		    <option value="{{i}}">{{i}}</option>
+                		    <option value="{{i}}" {% if annee_naiss == i  %}selected{% endif %}>{{i}}</option>
                 		{% endfor %}
                     </select>
                 </div>
@@ -359,7 +362,7 @@
     <div class="form-row">
     	<div class="col-sm-12 d-flex flex-column flex-wrap flex-md-row justify-content-between align-items-center">
             <div class="custom-control custom-checkbox mb-3 mb-md-0">
-                <input type="checkbox" class="custom-control-input" id="planner-agree" name="referred">
+                <input type="checkbox" class="custom-control-input" id="planner-agree" name="referred" {% if informations is not null and informations.getIsReferred %}checked{% endif %}>
                 <label class="custom-control-label" for="planner-agree"><small>Avez-vous été référé par quelqu'un ? (optionnel)</small>
                 </label>
             </div>
@@ -377,7 +380,7 @@
           <label for="pays_residence">Pays de résidence principale</label>
           <select name="pays_residence" class="custom-select" id="pays_residence">
               {% for c in countries %}
-                <option value="{{c.code}}-{{c.name}}">{{c.name}}</option>
+                <option value="{{c.code}}-{{c.name}}" {% if (informations is not null) and (informations.getPaysResidence == c.code~'-'~c.name) %} selected="selected" {% endif %}>{{c.name}}</option>
               {% endfor %}
           </select>
         </div>

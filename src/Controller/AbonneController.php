@@ -30,18 +30,34 @@ class AbonneController extends AbstractController
         $this->informationRepository = $informationRepository;
         $this->params = $params;
         $this->mailer = $mailer;
+    }	
+
+    /**
+     * @Route("/dashboard/abonne-action/{user_id}/{abonne}", name="abonne_action")
+     */
+    public function abonnePass(Request $request, $user_id, $abonne)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->security->getUser();
+        if($user->getRole() == 1)
+            return $this->redirectToRoute('inscription_home');
+        
+        $user = $this->userRepository->find($user_id);
+        if($abonne == "abonne"){
+            $user->setAbonne(1);
+            $this->addFlash("success", "Utilisateur désabonné");
+            $response = $this->redirectToRoute('list_abonne', ['abonne'=>'desabonne']);
+        }
+        elseif($abonne == "desabonne"){
+            $user->setAbonne(0);
+            $this->addFlash("success", "Utilisateur désabonné");
+            $response = $this->redirectToRoute('list_abonne', ['abonne'=>'abonne']);
+        }
+        $em->flush();
+        return $response;
     }
 
-	public function listAbonne(Request $request)
-    {
-    	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-    	$user = $this->security->getUser();
-    	if($user->getRole() == 1)
-    		return $this->redirectToRoute('inscription_home');
-		
-    	$users = $this->userRepository->findBy(['role'=>1]);
-		return $this->render('backoffice/abonne_list.html.twig', ['users'=>$users]);
-	}	
 	public function infosAbonne(Request $request, $id)
     {
     	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -50,6 +66,10 @@ class AbonneController extends AbstractController
     		return $this->redirectToRoute('inscription_home');
 		
     	$informations = $this->informationRepository->findOneBy(['user'=>$id]);
+        if(is_null($informations)){
+            $this->addFlash("infos", "Cet utilisateur n'a pas encore renseigné ces informations");
+            return $this->redirectToRoute('list_abonne');
+        }
 		return $this->render('backoffice/abonne_infos.html.twig', ['informations'=>$informations]);
 	}	
 	public function UpdateToCreate(Request $request, $id)
@@ -71,7 +91,11 @@ class AbonneController extends AbstractController
      * @Route("/diffusion-message", name="diffusion_message")
      */
     public function messageDiffusion(Request $request){
-        $users = $this->userRepository->findBy(['role'=>1]);
+        $user = $this->security->getUser();
+        if($user->getRole() == 1)
+            return $this->redirectToRoute('inscription_home');
+
+        $users = $this->userRepository->findBy(['abonne'=>1]);
         $message = $request->request->get('message') ?? "";
         $sujet = $request->request->get('sujet') ?? "";
         //$url = $request->request->get('url') ?? "";
@@ -109,7 +133,7 @@ class AbonneController extends AbstractController
                 $base64 = 'data:'.$file->getMimeType().';base64,' . base64_encode($data);
                 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'https://eu81.chat-api.com/instance121441/sendMessage?token=8tulq0p3h0bhuw31');
+                curl_setopt($ch, CURLOPT_URL, 'https://eu140.chat-api.com/instance137096/sendMessage?token=9girba15379ax0ys');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, "phone=".$user->getTelephone()."&body=".$base64."&filename=".$file->getClientOriginalName());
@@ -142,9 +166,28 @@ class AbonneController extends AbstractController
         //return new Response("Enregistrement effectuer avec succèes") ;
         return $this->redirectToRoute('list_abonne');
     }
+
+
+    /**
+     * @Route("/dashboard/list-abonne/{abonne}", name="list_abonne")
+     */
+    public function listAbonne(Request $request, $abonne = 'abonne')
+    {   
+        $abonne_find = ($abonne == 'abonne') ? 1:0;
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->security->getUser();
+        if($user->getRole() == 1)
+            return $this->redirectToRoute('inscription_home');
+        
+        $users = $this->userRepository->findBy(['abonne'=>$abonne_find]);
+        return $this->render('backoffice/abonne_list.html.twig', [
+            'users'=>$users,
+            'abonne'=>$abonne
+        ]);
+    }
 }
 
-/*
+    /*
         public function messageDiffusion(Request $request){
         $users = $this->userRepository->findBy(['role'=>1]);
         $message = $request->request->get('message');
@@ -180,4 +223,4 @@ class AbonneController extends AbstractController
         } catch (Exception $e) {
             print_r($e->getMessage());
         }
-*/
+    */

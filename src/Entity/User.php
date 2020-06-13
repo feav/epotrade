@@ -39,6 +39,11 @@ class User extends BaseUser
      */
     private $role;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $abonne;
+
 
     public function getId(): ?int
     {
@@ -51,6 +56,7 @@ class User extends BaseUser
         //$this->roles = ['ROLE_ADMIN'];
         $this->role = 1;
         $this->enabled = true;
+        $this->abonne = 0;
     }
 
     public function getPrenom(): ?string
@@ -103,6 +109,18 @@ class User extends BaseUser
     public function setRole(int $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getAbonne(): ?int
+    {
+        return $this->abonne;
+    }
+
+    public function setAbonne(?int $abonne): self
+    {
+        $this->abonne = $abonne;
 
         return $this;
     }
