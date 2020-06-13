@@ -24,6 +24,7 @@
                     <th>Id</th>
                     <th>Date_placement</th>
                     <th>Evenement</th>
+                    <th>Placement (€)</th>
                     <th>Gain (€)</th>
                     <th>Status</th>
                     <th>actions</th>
@@ -35,6 +36,7 @@
                     <td>{{ signaux.id }}</td>
                     <td>{{ signaux.datePlacement ? signaux.datePlacement|date('Y-m-d H:i') : '' }}</td>
                     <td>{{ signaux.evenement }}</td>
+                    <td>{{ signaux.placement }}</td>
                     <td>{{ signaux.gain }}</td>
                     <td>{{ signaux.status == 0 ? 'En cours' : 'Terminé'}}</td>
                     <td style="text-align:center">

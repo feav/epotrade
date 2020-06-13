@@ -15,6 +15,7 @@ class SignauxType extends AbstractType
         $builder
             //->add('date_placement')
             ->add('evenement')
+            ->add('placement')
             ->add('gain')
             ->add('status', ChoiceType::class, [
                 'choices' => [

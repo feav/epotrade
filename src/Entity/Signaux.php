@@ -36,6 +36,11 @@ class Signaux
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $placement;
+
     public function __construct()
     {
         $this->date_placement = new \DateTime();
@@ -92,6 +97,18 @@ class Signaux
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPlacement(): ?float
+    {
+        return $this->placement;
+    }
+
+    public function setPlacement(?float $placement): self
+    {
+        $this->placement = $placement;
 
         return $this;
     }
