@@ -7,6 +7,7 @@
 #/public/bundles/
 /var/
 /src/Migrations
+.env
 #/vendor/
 ###< symfony/framework-bundle ###
 
